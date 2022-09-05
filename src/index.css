@@ -1,0 +1,39 @@
+:root {
+  --true-width: 192px;
+  --true-height: 144px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(5)
+}
+
+.grid {
+  width: var(--true-width);
+  height: var(--true-height);
+  border: 1px solid red;
+}
+
+.grid table {
+  width: var(--true-width);
+  height: var(--true-height);
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.grid table td {
+  text-align: center;
+  border: 1px solid blue;
+}

@@ -28,6 +28,7 @@ const App = () => {
   const [cards, setCards] = useState(cards1)
   const [waitingForMusicLoad, setWaitingForMusicLoad] = useState(true)
   const [music, setMusic] = useState<HTMLAudioElement>(new Audio(musicUrl))
+  const [musicPlayingIndicator, setMusicPlayingIndicator] = useState(false)
   useEffect(() => {
     music.loop = true
     music.addEventListener('canplaythrough', () => {
@@ -35,20 +36,23 @@ const App = () => {
     })
     return () => {
       music.pause()
+      setMusicPlayingIndicator(false)
     }
   }, [])
   const toggleMusic = () => {
     if (music.paused) {
       music.play()
+      setMusicPlayingIndicator(true)
     } else {
       music.pause()
+      setMusicPlayingIndicator(false)
     }
   }
   return (
-    <div className="App">
+    <div className="app">
       <Grid cards={cards}></Grid>
       <button onClick={toggleMusic} disabled={waitingForMusicLoad}>
-        {music.paused ? 'Play' : 'Pause'}
+        {musicPlayingIndicator ? 'Pause' : 'Play'}
       </button>
     </div>
   )
