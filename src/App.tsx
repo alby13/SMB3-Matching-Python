@@ -16,7 +16,7 @@ const cards1 = (() => {
   const cards = []
   for (let i = 0; i < layouts[0].length; i++) {
     const card: Card = {
-      index: i,
+      key: i,
       cardType: layouts[0][i]
     }
     cards[i] = card

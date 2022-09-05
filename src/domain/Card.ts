@@ -1,6 +1,6 @@
 import { CardType } from './CardType'
 
 export interface Card {
-  index: number,
+  key: number,
   cardType: CardType
 }
