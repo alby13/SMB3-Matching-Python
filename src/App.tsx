@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Grid from './components/Grid'
 import { Card } from './domain/Card'
 import { CardType } from './domain/CardType'
 import Controls from './components/Controls'
+import stripesUrl from './assets/stripes.png'
 
 const layouts = [
   [
@@ -27,7 +28,7 @@ const cards1 = (() => {
 const App = () => {
   const [cards, setCards] = useState(cards1)
   return (
-    <div className="app">
+    <div className="app" style={{ backgroundImage: `url(${stripesUrl})` }}>
       <Grid cards={cards}></Grid>
       {/* <Controls /> */}
     </div>
