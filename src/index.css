@@ -8,16 +8,32 @@ body, html {
   padding: 0;
   overflow: hidden;
   color: #fff;
+  background-color: #000;
+  image-rendering: pixelated;
+  /* https://stackoverflow.com/a/11237968 */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
+  -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
 }
 
-.app {
+#root {
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  image-rendering: pixelated;
+}
+
+.app {
+  width: 240px; /* 224 + 16 */
+  height: 184px; /* 176 + 8 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .grid {
