@@ -30,9 +30,9 @@ function calculateScale(width: number, height: number): number {
   height = height || 1
   // Black area is 224x176, so 224/176 = 1.2727272727... WxH ratio
   if (width / height < 1.2727272727) {
-    return width / 224 // Scale based on window width
+    return width / 214 // 224-10, prevents too much side padding in portrait view
   } else {
-    return height / 176 // Scale based on window height
+    return height / 176
   }
 }
 
