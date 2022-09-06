@@ -27,6 +27,15 @@ const cards1 = (() => {
 
 const App = () => {
   const [cards, setCards] = useState(cards1)
+  useEffect(() => {
+    const resizeHandler = () => {
+      console.log('resize', window.innerWidth, window.innerHeight)
+    }
+    window.addEventListener('resize', resizeHandler)
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+    }
+  })
   return (
     <div className="app" style={{ backgroundImage: `url(${stripesUrl})` }}>
       <Grid cards={cards}></Grid>
