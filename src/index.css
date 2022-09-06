@@ -3,11 +3,12 @@
   --true-height: 144px;
 }
 
-body {
+body, html {
   margin: 0;
   padding: 0;
   overflow: hidden;
   color: #fff;
+  user-select: none;
 }
 
 .app {
@@ -16,7 +17,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: scale(5);
   image-rendering: pixelated;
 }
 
@@ -44,4 +44,9 @@ body {
   object-position: 0 0;
   width: 32px;
   height: 48px;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }

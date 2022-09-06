@@ -25,19 +25,39 @@ const cards1 = (() => {
   return cards
 })
 
+function calculateScale(width: number, height: number): number {
+  width = width || 1
+  height = height || 1
+  // Black area is 224x176, so 224/176 = 1.2727272727... WxH ratio
+  if (width / height < 1.2727272727) {
+    return width / 224 // Scale based on window width
+  } else {
+    return height / 176 // Scale based on window height
+  }
+}
+
 const App = () => {
   const [cards, setCards] = useState(cards1)
+  const [scale, setScale] = useState(1)
   useEffect(() => {
     const resizeHandler = () => {
-      console.log('resize', window.innerWidth, window.innerHeight)
+      const newScale = calculateScale(window.innerWidth, window.innerHeight)
+      setScale(newScale)
     }
     window.addEventListener('resize', resizeHandler)
+    resizeHandler()
     return () => {
       window.removeEventListener('resize', resizeHandler)
     }
   })
   return (
-    <div className="app" style={{ backgroundImage: `url(${stripesUrl})` }}>
+    <div
+      className="app"
+      style={{
+        backgroundImage: `url(${stripesUrl})`,
+        transform: `scale(${scale})`
+      }}
+    >
       <Grid cards={cards}></Grid>
       {/* <Controls /> */}
     </div>

@@ -8,7 +8,7 @@ type Props = {
 const CardTile: React.FC<Props> = ({ card }) => {
   return (
     <div>
-      <img className="card-tile" src={cardsUrl} />
+      <img draggable="false" className="card-tile" src={cardsUrl} />
     </div>
   )
 }
