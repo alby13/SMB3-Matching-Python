@@ -2,5 +2,6 @@ import { CardType } from './CardType'
 
 export interface Card {
   key: number,
-  cardType: CardType
+  cardType: CardType,
+  matched: boolean
 }

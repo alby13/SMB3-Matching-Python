@@ -18,7 +18,8 @@ const cards1 = (() => {
   for (let i = 0; i < layouts[0].length; i++) {
     const card: Card = {
       key: i,
-      cardType: layouts[0][i]
+      cardType: layouts[0][i],
+      matched: false
     }
     cards[i] = card
   }
@@ -50,6 +51,13 @@ const App = () => {
       window.removeEventListener('resize', resizeHandler)
     }
   })
+  const flipCardHandler = (card: Card): boolean => {
+    console.log(card)
+    const cardsNext = [...cards]
+    cardsNext[card.key] = { ...card, matched: true }
+    setCards(cardsNext)
+    return true // TODO: Return false if not a match
+  }
   return (
     <div
       className="app"
@@ -58,7 +66,7 @@ const App = () => {
         transform: `scale(${scale})`
       }}
     >
-      <Grid cards={cards}></Grid>
+      <Grid cards={cards} flipCardHandler={flipCardHandler}></Grid>
       {/* <Controls /> */}
     </div>
   )
