@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import Grid from './components/Grid'
 import { Card } from './domain/Card'
 import { CardType } from './domain/CardType'
-import Controls from './components/Controls'
 import stripesUrl from './assets/stripes.png'
 
 const layouts = [
@@ -67,7 +66,6 @@ const App = () => {
       }}
     >
       <Grid cards={cards} flipCardHandler={flipCardHandler}></Grid>
-      {/* <Controls /> */}
     </div>
   )
 }
