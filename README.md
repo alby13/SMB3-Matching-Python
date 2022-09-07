@@ -1,4 +1,6 @@
-# Super Mario Bros 3 | Match Game | Clone
+# matching
+
+A Super Mario Bros 3 match game clone
 
 ## Credits
 
