@@ -27,16 +27,15 @@ const cards1 = (() => {
 })
 
 function calculateScale(width: number, height: number): number {
-  width = width || 1
-  height = height || 1
+  const ratio = (width || 1) / (height || 1)
   // Black area is 224x176, so 224/176 = 1.2727272727... WxH ratio
-  if (width / height < 1.2727272727) {
+  // TODO: 800/629 (1.2718600954) to 800/658 (1.2158054711) border is completely gone
+  if (ratio < 1.2727272727) {
     return width / 214 // 224-10, prevents too much side padding in portrait view
   } else {
     return height / 176
   }
 }
-
 const App = () => {
   const [cards, setCards] = useState(cards1)
   const [scale, setScale] = useState(1)
