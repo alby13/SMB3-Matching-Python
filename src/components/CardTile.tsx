@@ -7,6 +7,7 @@ import { CardType } from '../domain/CardType'
 type Props = {
   card: Card
   flipCardHandler: (card: Card) => boolean
+  checkMatch: (key: number) => void
 }
 
 function animateFlipping(
@@ -68,16 +69,16 @@ function animateFlipping(
   }
 }
 
-const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
+const CardTile: React.FC<Props> = ({ card, flipCardHandler, checkMatch }) => {
   const [objectPosition, setObjectPosition] = useState('0 0')
   const [flipping, setFlipping] = useState(false)
   useEffect(() => {
     if (flipping) {
-      console.log('here1')
       animateFlipping(card.visible, card, setObjectPosition, setFlipping)
     } else {
-      // TODO: Means that the flip just ended, signal to check cards
-      console.log('flip ended', card)
+      if (card.visible) {
+        checkMatch(card.key)
+      }
     }
   }, [flipping])
   const clickHandler = () => {

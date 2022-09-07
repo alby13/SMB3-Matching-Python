@@ -58,6 +58,28 @@ const App = () => {
     setCards(cardsNext)
     return true // TODO: Return false if not a match
   }
+  const checkMatch = (key: number) => {
+    const typeToFind = cards[key].cardType
+    let foundVisible = false
+    for (let candidate of cards) {
+      if (candidate.key === key) {
+        continue
+      }
+      if (candidate.matched || !candidate.visible) {
+        continue
+      }
+      foundVisible = true
+      if (candidate.cardType !== typeToFind) {
+        continue
+      }
+      console.log('MATCH FOUND', candidate.key, key)
+      // TODO: Handle it
+      return
+    }
+    if (foundVisible) {
+      console.log('No match found', key)
+    }
+  }
   return (
     <div
       className="app"
@@ -66,7 +88,9 @@ const App = () => {
         transform: `scale(${scale})`
       }}
     >
-      <Grid cards={cards} flipCardHandler={flipCardHandler}></Grid>
+      <Grid cards={cards}
+        flipCardHandler={flipCardHandler}
+        checkMatch={checkMatch} />
     </div>
   )
 }
