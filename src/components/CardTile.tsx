@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card } from '../domain/Card'
 import cardsUrl from '../assets/cards.png'
 import { useEffect, useState } from 'react'
@@ -15,60 +16,65 @@ enum TileState {
   Showing
 }
 
+function animateFlipping(forward: boolean, card: Card, setObjectPosition: React.Dispatch<React.SetStateAction<string>>) {
+  let step = forward ? 0 : 2
+  let tickId: number | undefined = undefined
+  const tick = () => {
+    switch (step) {
+      case -1:
+        setObjectPosition('0 0')
+        break
+      case 0:
+        setObjectPosition('-32px 0')
+        break
+      case 1:
+        setObjectPosition('-64px 0')
+        break
+      case 2:
+        setObjectPosition('-96px 0')
+        break
+      case 3:
+        switch (card.cardType) {
+          case CardType.Mushroom:
+            setObjectPosition('-64px -48px')
+            break
+          case CardType.Flower:
+            setObjectPosition('-96px -48px')
+            break
+          case CardType.Coins10:
+            setObjectPosition('0 -48px')
+            break
+          case CardType.Coins20:
+            setObjectPosition('-32px -48px')
+            break
+          case CardType.Star:
+            setObjectPosition('-128px -48px')
+            break
+          case CardType.OneUp:
+            setObjectPosition('-128px 0')
+            break
+        }
+        break
+    }
+    forward ? step++ : step--
+    if (step >= -1 && step <= 3) {
+      tickId = setTimeout(tick, 64)
+    } else {
+      clearTimeout(tickId)
+    }
+  }
+  tick()
+  return () => {
+    clearTimeout(tickId)
+  }
+}
+
 const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
   const [objectPosition, setObjectPosition] = useState('0 0')
   const [tileState, setTileState] = useState(TileState.Hidden)
   useEffect(() => {
     if (tileState === TileState.FlippingFront) {
-      let step = 0
-      let tickId: number | undefined = undefined
-      const tick = () => {
-        console.log('step', step)
-        switch (step) {
-          case 0:
-            setObjectPosition('-32px 0')
-            step = 1
-            break
-          case 1:
-            setObjectPosition('-64px 0')
-            step = 2
-            break
-          case 2:
-            setObjectPosition('-96px 0')
-            step = 3
-            break
-          case 3:
-            switch (card.cardType) {
-              case CardType.Mushroom:
-                setObjectPosition('-64px -48px')
-                break
-              case CardType.Flower:
-                setObjectPosition('-96px -48px')
-                break
-              case CardType.Coins10:
-                setObjectPosition('0 -48px')
-                break
-              case CardType.Coins20:
-                setObjectPosition('-32px -48px')
-                break
-              case CardType.Star:
-                setObjectPosition('-128px -48px')
-                break
-              case CardType.OneUp:
-                setObjectPosition('-128px 0')
-                break
-            }
-            clearTimeout(tickId)
-            break
-        }
-        if (step <= 3) {
-          tickId = setTimeout(tick, 64)
-        }
-      }
-      tick()
-      return () => {
-        clearTimeout(tickId)
-      }
+      animateFlipping(true, card, setObjectPosition)
     }
   }, [tileState])
   const clickHandler = () => {
