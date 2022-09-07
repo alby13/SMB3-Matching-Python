@@ -1,8 +1,8 @@
 export enum CardType {
-  Mushroom,
-  Flower,
-  Coins10,
-  Coins20,
-  Star,
-  OneUp
+  Mushroom = 'mushroom',
+  Flower = 'flower',
+  Coins10 = 'coins10',
+  Coins20 = 'coins20',
+  Star = 'star',
+  OneUp = 'oneup'
 }

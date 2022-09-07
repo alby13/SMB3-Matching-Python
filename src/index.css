@@ -64,3 +64,47 @@ body, html {
   -o-user-drag: none;
   user-drag: none;
 }
+
+.card-tile-flip-forward {
+  animation-name: card-tile-flip-forward;
+  animation-duration: 256ms;
+  animation-timing-function: steps(3, jump-none);
+  animation-fill-mode: forwards;
+}
+
+@keyframes card-tile-flip-forward {
+  from {
+    object-position: -32px 0
+  }
+  to {
+    object-position: -96px 0
+  }
+}
+
+.card-tile-hidden {
+  object-position: 0 0;
+}
+
+.card-tile-mushroom {
+  object-position: -64px -48px;
+}
+
+.card-tile-flower {
+  object-position: -96px -48px;
+}
+
+.card-tile-coins10 {
+  object-position: 0 -48px;
+}
+
+.card-tile-coins20 {
+  object-position: -32px -48px;
+}
+
+.card-tile-star {
+  object-position: -128px -48px;
+}
+
+.card-tile-oneup {
+  object-position: -128px 0;
+}
