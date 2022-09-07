@@ -9,14 +9,12 @@ type Props = {
   flipCardHandler: (card: Card) => boolean
 }
 
-enum TileState {
-  Hidden,
-  FlippingFront,
-  FlippingBack,
-  Showing
-}
-
-function animateFlipping(forward: boolean, card: Card, setObjectPosition: React.Dispatch<React.SetStateAction<string>>) {
+function animateFlipping(
+  forward: boolean,
+  card: Card,
+  setObjectPosition: React.Dispatch<React.SetStateAction<string>>,
+  setFlipping: React.Dispatch<React.SetStateAction<boolean>>
+) {
   let step = forward ? 0 : 2
   let tickId: number | undefined = undefined
   const tick = () => {
@@ -60,6 +58,7 @@ function animateFlipping(forward: boolean, card: Card, setObjectPosition: React.
     if (step >= -1 && step <= 3) {
       tickId = setTimeout(tick, 64)
     } else {
+      setFlipping(false)
       clearTimeout(tickId)
     }
   }
@@ -71,16 +70,20 @@ function animateFlipping(forward: boolean, card: Card, setObjectPosition: React.
 
 const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
   const [objectPosition, setObjectPosition] = useState('0 0')
-  const [tileState, setTileState] = useState(TileState.Hidden)
+  const [flipping, setFlipping] = useState(false)
   useEffect(() => {
-    if (tileState === TileState.FlippingFront) {
-      animateFlipping(true, card, setObjectPosition)
+    if (flipping) {
+      console.log('here1')
+      animateFlipping(true, card, setObjectPosition, setFlipping)
+    } else {
+      // TODO: Means that the flip just ended, signal to check cards
+      console.log('flip ended', card)
     }
-  }, [tileState])
+  }, [flipping])
   const clickHandler = () => {
-    if (!card.matched && tileState === TileState.Hidden) {
+    if (!card.matched && !flipping) {
       if (flipCardHandler(card)) {
-        setTileState(TileState.FlippingFront)
+        setFlipping(true)
         console.log('TODO: Something')
       }
     }
