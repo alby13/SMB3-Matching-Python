@@ -1,8 +1,6 @@
-import React, { useRef } from 'react'
-import { Card } from '../domain/Card'
+import React, { useState } from 'react'
 import cardsUrl from '../assets/cards.png'
-import { useEffect, useState } from 'react'
-import { CardType } from '../domain/CardType'
+import { Card } from '../domain/Card'
 
 type Props = {
   card: Card
