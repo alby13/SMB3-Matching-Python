@@ -73,6 +73,13 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler, checkMatch }) => {
   const [objectPosition, setObjectPosition] = useState('0 0')
   const [flipping, setFlipping] = useState(false)
   useEffect(() => {
+    if (card.visible) {
+      console.log('card.visible, TODO: Anything?')
+    } else {
+      console.log('visible', card.visible, 'flipping', flipping)
+    }
+  }, [card.visible])
+  useEffect(() => {
     if (flipping) {
       animateFlipping(card.visible, card, setObjectPosition, setFlipping)
     } else {
