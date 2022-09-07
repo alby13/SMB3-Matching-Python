@@ -74,14 +74,14 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
   useEffect(() => {
     if (flipping) {
       console.log('here1')
-      animateFlipping(true, card, setObjectPosition, setFlipping)
+      animateFlipping(card.visible, card, setObjectPosition, setFlipping)
     } else {
       // TODO: Means that the flip just ended, signal to check cards
       console.log('flip ended', card)
     }
   }, [flipping])
   const clickHandler = () => {
-    if (!card.matched && !flipping) {
+    if (!card.visible && !flipping) {
       if (flipCardHandler(card)) {
         setFlipping(true)
         console.log('TODO: Something')

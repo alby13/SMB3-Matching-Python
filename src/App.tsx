@@ -18,6 +18,7 @@ const cards1 = (() => {
     const card: Card = {
       key: i,
       cardType: layouts[0][i],
+      visible: false,
       matched: false
     }
     cards[i] = card
@@ -53,7 +54,7 @@ const App = () => {
   const flipCardHandler = (card: Card): boolean => {
     console.log(card)
     const cardsNext = [...cards]
-    cardsNext[card.key] = { ...card, matched: true }
+    cardsNext[card.key] = { ...card, visible: true }
     setCards(cardsNext)
     return true // TODO: Return false if not a match
   }
