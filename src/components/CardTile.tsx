@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import cardsUrl from '../assets/cards.png'
 import selectorUrl from '../assets/selector.png'
 import { Card } from '../domain/Card'
+import { playSelectSound } from '../SoundSystem'
 
 type Props = {
   card: Card
@@ -14,6 +15,7 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler, checkMatch }) => {
   const [selected, setSelected] = useState(false)
   const clickHandler = () => {
     if (!card.visible) {
+      playSelectSound()
       if (flipCardHandler(card)) {
         console.log('TODO: Something')
       }
