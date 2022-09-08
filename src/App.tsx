@@ -4,9 +4,7 @@ import { Card } from './domain/Card'
 import { CardType } from './domain/CardType'
 import stripesUrl from './assets/stripes.png'
 import { playCoinSound, playMatchCorrectSound, playMatchIncorrectSound, playOneUpSound } from './SoundSystem'
-
-const FLIP_DURATION = 256 // Should match the animation value in index.css
-const OUTCOME_DELAY = FLIP_DURATION * 1.2 // Just a little bit longer than the flip duration
+import { FLIP_BACK_DELAY } from './constants'
 
 const patterns = [
   [
@@ -41,13 +39,17 @@ function calculateScale(width: number, height: number): number {
   }
 }
 
-function findCandidate(cards: Card[]): Card | null {
-    for (let candidate of cards) {
-      if (candidate.visible && !candidate.matched) {
-        return candidate
+function findCandidates(cards: Card[]): [Card, Card] | null {
+  let candidates: Array<Card> = []
+  for (let card of cards) {
+    if (card.visible && !card.matched) {
+      candidates.push(card)
+      if (candidates.length === 2) {
+        return [candidates[0], candidates[1]]
       }
     }
-    return null
+  }
+  return null
 }
 
 const App = () => {
@@ -65,34 +67,44 @@ const App = () => {
     }
   })
   const flipCardHandler = (cardToFlip: Card) => {
-    const candidate = findCandidate(cards)
     const cardsNext = [...cards]
-    let matched = false
-    if (candidate !== null) {
-      matched = cardToFlip.cardType === candidate.cardType
-      if (matched) {
-        if (cardToFlip.cardType === CardType.Coins10 || cardToFlip.cardType === CardType.Coins20) {
-          playCoinSound(OUTCOME_DELAY)
-        } else if (cardToFlip.cardType === CardType.OneUp) {
-          playOneUpSound(OUTCOME_DELAY)
-        } else {
-          playMatchCorrectSound(OUTCOME_DELAY)
-        }
-      } else {
-        playMatchIncorrectSound(OUTCOME_DELAY)
-      }
-      cardsNext[candidate.key] = {
-        ...candidate,
-        visible: matched,
-        matched
-      }
-    }
     cardsNext[cardToFlip.key] = {
       ...cardToFlip,
-      visible: candidate ? matched : true,
-      matched
+      visible: true
     }
     setCards(cardsNext)
+  }
+  const checkMatch = (cb: () => void) => {
+    const candidates = findCandidates(cards)
+    if (!candidates) return
+    const [c1, c2] = candidates
+    const matched = c1.cardType === c2.cardType
+    if (matched) {
+      if (c1.cardType === CardType.Coins10 || c1.cardType === CardType.Coins20) {
+        playCoinSound()
+      } else if (c1.cardType === CardType.OneUp) {
+        playOneUpSound()
+      } else {
+        playMatchCorrectSound()
+      }
+    } else {
+      playMatchIncorrectSound()
+    }
+    setTimeout(() => {
+      const cardsNext = [...cards]
+      cardsNext[c1.key] = {
+        ...c1,
+        matched,
+        visible: matched
+      }
+      cardsNext[c2.key] = {
+        ...c2,
+        matched,
+        visible: matched
+      }
+      setCards(cardsNext)
+      cb()
+    }, matched ? 0 : FLIP_BACK_DELAY)
   }
   return (
     <div
@@ -103,7 +115,8 @@ const App = () => {
       }}
     >
       <Grid cards={cards}
-        flipCardHandler={flipCardHandler} />
+        flipCardHandler={flipCardHandler}
+        checkMatch={checkMatch} />
     </div>
   )
 }

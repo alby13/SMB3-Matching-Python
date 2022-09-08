@@ -70,28 +70,20 @@ export function playClearWorseSound() {
   playSound(clearWorseUrl)
 }
 
-export function playOneUpSound(delay: number) {
-  setTimeout(() => {
-    playSound(oneUpUrl)
-  }, delay)
+export function playOneUpSound() {
+  playSound(oneUpUrl)
 }
 
-export function playCoinSound(delay: number) {
-  setTimeout(() => {
-    playSound(coinUrl)
-  }, delay)
+export function playCoinSound() {
+  playSound(coinUrl)
 }
 
-export function playMatchCorrectSound(delay: number) {
-  setTimeout(() => {
-    playSound(matchCorrectUrl)
-  }, delay)
+export function playMatchCorrectSound() {
+  playSound(matchCorrectUrl)
 }
 
-export function playMatchIncorrectSound(delay: number) {
-  setTimeout(() => {
-    playSound(matchIncorrectUrl)
-  }, delay)
+export function playMatchIncorrectSound() {
+  playSound(matchIncorrectUrl)
 }
 
 export function playSelectSound() {

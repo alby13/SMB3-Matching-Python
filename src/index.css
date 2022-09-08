@@ -67,15 +67,15 @@ body, html {
 
 .card-tile-flip-forward {
   animation-name: card-tile-flip;
-  animation-duration: 256ms; /* Should match constant in App.tsx */
+  animation-duration: 256ms; /* Should match constant in constants.ts */
   animation-timing-function: steps(3, jump-none);
   animation-fill-mode: forwards;
 }
 
 .card-tile-flip-backward {
-  animation-direction: reverse; /* Only difference with .card-tile-flip-forward */
+  animation-direction: reverse;
   animation-name: card-tile-flip;
-  animation-duration: 256ms; /* Should match constant in App.tsx */
+  animation-duration: 256ms; /* Should match constant in constants.ts */
   animation-timing-function: steps(3, jump-none);
   animation-fill-mode: forwards;
 }
