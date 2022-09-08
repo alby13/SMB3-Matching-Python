@@ -63,31 +63,30 @@ async function playSound(url: string) {
   })
 }
 
-// export function playClearBetterSound() {
-//   playSound(clearBetterSound)
-// }
+export function playClearBetterSound() {
+  playSound(clearBetterUrl)
+}
 
-// export function playClearWorseSound() {
-//   playSound(clearWorseSound)
-// }
+export function playClearWorseSound() {
+  playSound(clearWorseUrl)
+}
 
-// export function playOneUpSound() {
-//   playSound(oneUpSound)
-// }
+export function playOneUpSound() {
+  playSound(oneUpUrl)
+}
 
-// export function playCoinSound() {
-//   playSound(coinSound)
-// }
+export function playCoinSound() {
+  playSound(coinUrl)
+}
 
-// export function playMatchCorrectSound() {
-//   playSound(matchCorrectSound)
-// }
+export function playMatchCorrectSound() {
+  playSound(matchCorrectUrl)
+}
 
-// export function playMatchIncorrectSound() {
-//  playSound(matchIncorrectSound)
-// }
+export function playMatchIncorrectSound() {
+ playSound(matchIncorrectUrl)
+}
 
 export function playSelectSound() {
-  sfxMap
   playSound(selectUrl)
 }

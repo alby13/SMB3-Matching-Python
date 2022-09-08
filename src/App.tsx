@@ -4,7 +4,7 @@ import { Card } from './domain/Card'
 import { CardType } from './domain/CardType'
 import stripesUrl from './assets/stripes.png'
 
-const layouts = [
+const patterns = [
   [
     CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Star,
     CardType.Flower, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Coins20,
@@ -14,10 +14,10 @@ const layouts = [
 
 const cards1 = (() => {
   const cards = []
-  for (let i = 0; i < layouts[0].length; i++) {
+  for (let i = 0; i < patterns[0].length; i++) {
     const card: Card = {
       key: i,
-      cardType: layouts[0][i],
+      cardType: patterns[0][i],
       visible: false,
       matched: false
     }
