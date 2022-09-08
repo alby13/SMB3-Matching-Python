@@ -3,7 +3,7 @@ import CardTile from './CardTile'
 
 type Props = {
   cards: Array<Card>
-  flipCardHandler: (card: Card) => boolean
+  flipCardHandler: (card: Card) => void
   checkMatch: (key: number) => void
 }
 

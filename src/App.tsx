@@ -50,12 +50,11 @@ const App = () => {
       window.removeEventListener('resize', resizeHandler)
     }
   })
-  const flipCardHandler = (card: Card): boolean => {
+  const flipCardHandler = (card: Card) => {
     console.log(card)
     const cardsNext = [...cards]
     cardsNext[card.key] = { ...card, visible: true }
     setCards(cardsNext)
-    return true // TODO: Return false if not a match
   }
   const checkMatch = (key: number) => {
     const typeToFind = cards[key].cardType
@@ -72,7 +71,6 @@ const App = () => {
         continue
       }
       console.log('MATCH FOUND', candidate.key, key)
-      // TODO: Handle it
       return
     }
     if (foundVisible) {

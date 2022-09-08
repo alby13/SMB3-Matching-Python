@@ -6,7 +6,7 @@ import { playSelectSound } from '../SoundSystem'
 
 type Props = {
   card: Card
-  flipCardHandler: (card: Card) => boolean
+  flipCardHandler: (card: Card) => void
   checkMatch: (key: number) => void
 }
 
@@ -16,9 +16,7 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler, checkMatch }) => {
   const clickHandler = () => {
     if (!card.visible) {
       playSelectSound()
-      if (flipCardHandler(card)) {
-        console.log('TODO: Something')
-      }
+      flipCardHandler(card)
       setAnimationClass('card-tile-flip-forward')
     }
   }

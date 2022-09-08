@@ -54,7 +54,6 @@ async function ensureSoundLoaded(url: string) {
  */
 async function playSound(url: string) {
   ensureSoundLoaded(url).then(source => {
-    console.log('TODO: Something here', source)
     if (source) {
       source.start()
     } else {
