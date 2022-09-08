@@ -7,10 +7,9 @@ import { playSelectSound } from '../SoundSystem'
 type Props = {
   card: Card
   flipCardHandler: (card: Card) => void
-  checkMatch: (key: number) => void
 }
 
-const CardTile: React.FC<Props> = ({ card, flipCardHandler, checkMatch }) => {
+const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
   const [animationClass, setAnimationClass] = useState('card-tile-hidden')
   const [selected, setSelected] = useState(false)
   const clickHandler = () => {

@@ -4,10 +4,9 @@ import CardTile from './CardTile'
 type Props = {
   cards: Array<Card>
   flipCardHandler: (card: Card) => void
-  checkMatch: (key: number) => void
 }
 
-const Grid: React.FC<Props> = ({ cards, flipCardHandler, checkMatch }) => {
+const Grid: React.FC<Props> = ({ cards, flipCardHandler }) => {
   return (
     <div className="grid">
       <table>
@@ -16,8 +15,7 @@ const Grid: React.FC<Props> = ({ cards, flipCardHandler, checkMatch }) => {
             {cards.slice(0, 6).map(card => (
               <td key={card.key}>
                 <CardTile card={card}
-                          flipCardHandler={flipCardHandler}
-                          checkMatch={checkMatch} />
+                          flipCardHandler={flipCardHandler} />
               </td>)
             )}
           </tr>
@@ -25,8 +23,7 @@ const Grid: React.FC<Props> = ({ cards, flipCardHandler, checkMatch }) => {
             {cards.slice(6, 12).map(card => (
               <td key={card.key}>
                 <CardTile card={card}
-                          flipCardHandler={flipCardHandler}
-                          checkMatch={checkMatch} />
+                          flipCardHandler={flipCardHandler} />
               </td>)
             )}
           </tr>
@@ -34,8 +31,7 @@ const Grid: React.FC<Props> = ({ cards, flipCardHandler, checkMatch }) => {
             {cards.slice(12, 18).map(card => (
               <td key={card.key}>
                 <CardTile card={card}
-                          flipCardHandler={flipCardHandler}
-                          checkMatch={checkMatch} />
+                          flipCardHandler={flipCardHandler} />
               </td>)
             )}
           </tr>

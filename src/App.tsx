@@ -3,6 +3,10 @@ import Grid from './components/Grid'
 import { Card } from './domain/Card'
 import { CardType } from './domain/CardType'
 import stripesUrl from './assets/stripes.png'
+import { playCoinSound, playMatchCorrectSound, playMatchIncorrectSound, playOneUpSound } from './SoundSystem'
+
+const FLIP_DURATION = 256 // Should match the animation value in index.css
+const OUTCOME_DELAY = FLIP_DURATION * 1.2 // Just a little bit longer than the flip duration
 
 const patterns = [
   [
@@ -36,6 +40,16 @@ function calculateScale(width: number, height: number): number {
     return height / 176
   }
 }
+
+function findCandidate(cards: Card[]): Card | null {
+    for (let candidate of cards) {
+      if (candidate.visible && !candidate.matched) {
+        return candidate
+      }
+    }
+    return null
+}
+
 const App = () => {
   const [cards, setCards] = useState(cards1)
   const [scale, setScale] = useState(1)
@@ -50,32 +64,35 @@ const App = () => {
       window.removeEventListener('resize', resizeHandler)
     }
   })
-  const flipCardHandler = (card: Card) => {
-    console.log(card)
+  const flipCardHandler = (cardToFlip: Card) => {
+    const candidate = findCandidate(cards)
     const cardsNext = [...cards]
-    cardsNext[card.key] = { ...card, visible: true }
+    let matched = false
+    if (candidate !== null) {
+      matched = cardToFlip.cardType === candidate.cardType
+      if (matched) {
+        if (cardToFlip.cardType === CardType.Coins10 || cardToFlip.cardType === CardType.Coins20) {
+          playCoinSound(OUTCOME_DELAY)
+        } else if (cardToFlip.cardType === CardType.OneUp) {
+          playOneUpSound(OUTCOME_DELAY)
+        } else {
+          playMatchCorrectSound(OUTCOME_DELAY)
+        }
+      } else {
+        playMatchIncorrectSound(OUTCOME_DELAY)
+      }
+      cardsNext[candidate.key] = {
+        ...candidate,
+        visible: matched,
+        matched
+      }
+    }
+    cardsNext[cardToFlip.key] = {
+      ...cardToFlip,
+      visible: candidate ? matched : true,
+      matched
+    }
     setCards(cardsNext)
-  }
-  const checkMatch = (key: number) => {
-    const typeToFind = cards[key].cardType
-    let foundVisible = false
-    for (let candidate of cards) {
-      if (candidate.key === key) {
-        continue
-      }
-      if (candidate.matched || !candidate.visible) {
-        continue
-      }
-      foundVisible = true
-      if (candidate.cardType !== typeToFind) {
-        continue
-      }
-      console.log('MATCH FOUND', candidate.key, key)
-      return
-    }
-    if (foundVisible) {
-      console.log('No match found', key)
-    }
   }
   return (
     <div
@@ -86,8 +103,7 @@ const App = () => {
       }}
     >
       <Grid cards={cards}
-        flipCardHandler={flipCardHandler}
-        checkMatch={checkMatch} />
+        flipCardHandler={flipCardHandler} />
     </div>
   )
 }
