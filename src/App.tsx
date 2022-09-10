@@ -35,6 +35,12 @@ const App = () => {
       }}
     >
       <Grid />
+      {/* <div style={{
+        color: 'blue',
+        position: 'fixed'
+      }}>
+        Hello World
+      </div> */}
     </div>
   )
 }

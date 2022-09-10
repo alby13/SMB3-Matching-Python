@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { FLIP_DURATION, OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
+import { useEffect, useState } from 'react'
+import { OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
 import { Card } from '../domain/Card'
 import { CardType } from '../domain/CardType'
 import { playMatchCorrectSound, playMatchIncorrectSound, playSelectSound } from '../SoundSystem'
