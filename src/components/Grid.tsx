@@ -30,35 +30,17 @@ const cards1 = (() => {
 
 // TODO: DRY
 function markCardsAsMatched(cards: Card[], key1: number, key2: number) {
-  return cards.map(card => {
-    if (card.key === key1 || card.key === key2) {
-      return { ...card, matched: true }
-    } else {
-      return card
-    }
-  })
+  return cards.map(card => (card.key === key1 || card.key === key2) ? { ...card, matched: true } : card)
 }
 
 // TODO: DRY
 function hideCards(cards: Card[], key1: number, key2: number) {
-  return cards.map(card => {
-    if (card.key === key1 || card.key === key2) {
-      return { ...card, visible: false }
-    } else {
-      return card
-    }
-  })
+  return cards.map(card => (card.key === key1 || card.key === key2) ? { ...card, visible: false }: card)
 }
 
 // TODO: DRY
 function setCardFlipping(flippingBack: boolean, cards: Card[], key1: number, key2: number) {
-  return cards.map(card => {
-    if (card.key === key1 || card.key === key2) {
-      return { ...card, flippingBack }
-    } else {
-      return card
-    }
-  })
+  return cards.map(card => (card.key === key1 || card.key === key2) ? { ...card, flippingBack } : card)
 }
 
 const Grid = () => {
