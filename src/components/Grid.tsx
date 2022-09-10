@@ -46,15 +46,19 @@ function setCardFlipping(flippingBack: boolean, cards: Card[], key1: number, key
 const Grid = () => {
   const [cards, setCards] = useState(cards1)
   const [otherCardKey, setOtherCardKey] = useState<number | null>(null)
-  const [pairToHide, setPairToHide] = useState<[number, number]>([-1, -1])
+  const [pairToHide, setPairToHide] = useState<[number | null, number | null]>([null, null])
+  // Have to do this here so that the setTimeout() callback can get the latest cards array
   useEffect(() => {
-    // Have to do this here so that the setTimeout() callback can get the latest cards array
-    let cardsNext = hideCards(cards, pairToHide[0], pairToHide[1])
+    if (pairToHide[0] === null || pairToHide[1] === null) {
+      return
+    }
+    let cardsNext = cards.slice()
+    cardsNext = hideCards(cards, pairToHide[0], pairToHide[1])
     cardsNext = setCardFlipping(false, cardsNext, pairToHide[0], pairToHide[1])
     setCards(cardsNext)
   }, [pairToHide])
   const flipCardHandler = (key: number) => {
-    let cardsNext = cards.map(card => card)
+    let cardsNext = cards.slice()
     cardsNext = cardsNext.map(card => card.key === key ? { ...card, visible: true } : card)
     if (otherCardKey === null) {
       setOtherCardKey(key)
