@@ -39,6 +39,12 @@ function hideCards(cards: Card[], key1: number, key2: number) {
 }
 
 // TODO: DRY
+/**
+ * Call this to prevent clicks while a card is flipping back.
+ * Should be called:
+ *    1) Before setTimeout()
+ *    2) During the timeout's callback
+ */
 function setCardFlipping(flippingBack: boolean, cards: Card[], key1: number, key2: number) {
   return cards.map(card => (card.key === key1 || card.key === key2) ? { ...card, flippingBack } : card)
 }
