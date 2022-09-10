@@ -4,5 +4,6 @@ export interface Card {
   key: number,
   cardType: CardType,
   visible: boolean,
-  matched: boolean
+  matched: boolean,
+  flipping: boolean
 }

@@ -1,48 +1,53 @@
 import React, { useEffect, useRef, useState } from 'react'
 import cardsUrl from '../assets/cards.png'
 import selectorUrl from '../assets/selector.png'
-import { OUTCOME_DELAY } from '../constants'
+import { FLIP_DURATION } from '../constants'
 import { Card } from '../domain/Card'
 import { playSelectSound } from '../SoundSystem'
 
 type Props = {
   card: Card
-  flipCardHandler: (card: Card) => void
-  checkMatch: (cb: () => void) => void
+  flipCardHandler: (key: number) => void
 }
 
-const CardTile: React.FC<Props> = ({ card, flipCardHandler, checkMatch }) => {
+const CardTile: React.FC<Props> = ({ card, flipCardHandler  }) => {
+  const didMount = useRef(false)
   const [animationClass, setAnimationClass] = useState('card-tile-hidden')
   const [selected, setSelected] = useState(false)
-  const flipping = useRef(false)
   useEffect(() => {
+    // Prevent the flip back animation from running on initial render
+    console.log(card.visible, animationClass, didMount.current)
+    if (!didMount.current) {
+      didMount.current = true
+      return
+    }
     if (card.visible) {
-      flipping.current = true
       playSelectSound()
       setAnimationClass('card-tile-flip-forward')
+      setTimeout(() => { setAnimationClass(`card-tile-${card.cardType}`) }, FLIP_DURATION)
     } else {
-      flipping.current = true
       setAnimationClass('card-tile-flip-backward')
+      setTimeout(() => { setAnimationClass('card-tile-hidden') }, FLIP_DURATION)
     }
   }, [card.visible])
   const clickHandler = () => {
-    if (!card.visible && !flipping.current) {
-      flipCardHandler(card)
+    if (!card.visible && !card.flipping) {
+      flipCardHandler(card.key)
     }
   }
-  const animationEndHandler = () => {
-    if (card.visible) {
-      setAnimationClass(`card-tile-${card.cardType}`)
-      setTimeout(() => {
-        checkMatch(() => {
-          flipping.current = false // Do this afterwards to prevent attempts to click on a card that is visible but mismatched
-        })
-      }, OUTCOME_DELAY)
-    } else {
-      setAnimationClass('card-tile-hidden')
-      flipping.current = false
-    }
-  }
+  // const animationEndHandler = () => {
+  //   if (card.visible) {
+  //     setAnimationClass(`card-tile-${card.cardType}`)
+  //     setTimeout(() => {
+  //       checkMatch(() => {
+  //         flipping.current = false // Do this afterwards to prevent attempts to click on a card that is visible but mismatched
+  //       })
+  //     }, OUTCOME_DELAY)
+  //   } else {
+  //     setAnimationClass('card-tile-hidden')
+  //     flipping.current = false
+  //   }
+  // }
   const mouseOverHandler = () => {
     setSelected(true)
   }
@@ -67,7 +72,6 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler, checkMatch }) => {
         draggable="false"
         className={`card-tile ${animationClass}`}
         src={cardsUrl}
-        onAnimationEnd={animationEndHandler}
       />
     </div>
   )
