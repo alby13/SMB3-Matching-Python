@@ -20,7 +20,7 @@ const cards1 = (() => {
       cardType: patterns[0][i],
       visible: false,
       matched: false,
-      flipping: false
+      flippingBack: false
     }
     cards[i] = card
   }
@@ -29,9 +29,28 @@ const cards1 = (() => {
 
 const Grid = () => {
   const [cards, setCards] = useState(cards1)
-  const [activePair, setActivePair] = useState<Array<number | null>>([null, null])
+  const [otherCardKey, setOtherCardKey] = useState<number | null>(null)
   const flipCardHandler = (key: number) => {
-    let cardsNext = cards.map(card => card.key === key ? { ...card, visible: true } : card)
+    let cardsNext = cards
+    cardsNext = cardsNext.map(card => card.key === key ? { ...card, visible: true } : card)
+    if (otherCardKey === null) {
+      setOtherCardKey(key)
+    } else {
+      const cardA = cards[otherCardKey]
+      const cardB = cards[key]
+      if (cardA.cardType === cardB.cardType) {
+        cardsNext = cardsNext.map((card) => {
+          if (card.key === key || card.key === otherCardKey) {
+            return { ...card, matched: true }
+          } else {
+            return card
+          }
+        })
+      } else {
+        console.log('TODO: Mismatch')
+      }
+      setOtherCardKey(null)
+    }
     setCards(cardsNext)
     playSelectSound()
   }
@@ -42,24 +61,27 @@ const Grid = () => {
           <tr>
             {cards.slice(0, 6).map(card => (
               <td key={card.key}>
-                <CardTile card={card}
-                          flipCardHandler={flipCardHandler} />
+                <CardTile
+                  card={card}
+                  flipCardHandler={flipCardHandler} />
               </td>)
             )}
           </tr>
           <tr>
             {cards.slice(6, 12).map(card => (
               <td key={card.key}>
-                <CardTile card={card}
-                          flipCardHandler={flipCardHandler} />
+                <CardTile
+                  card={card}
+                  flipCardHandler={flipCardHandler} />
               </td>)
             )}
           </tr>
           <tr>
             {cards.slice(12, 18).map(card => (
               <td key={card.key}>
-                <CardTile card={card}
-                          flipCardHandler={flipCardHandler} />
+                <CardTile
+                  card={card}
+                  flipCardHandler={flipCardHandler} />
               </td>)
             )}
           </tr>

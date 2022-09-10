@@ -15,7 +15,6 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler  }) => {
   const [selected, setSelected] = useState(false)
   useEffect(() => {
     // Prevent the flip back animation from running on initial render
-    console.log(card.visible, animationClass, didMount.current)
     if (!didMount.current) {
       didMount.current = true
       return
@@ -29,23 +28,10 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler  }) => {
     }
   }, [card.visible])
   const clickHandler = () => {
-    if (!card.visible && !card.flipping) {
+    if (!card.visible && !card.flippingBack) {
       flipCardHandler(card.key)
     }
   }
-  // const animationEndHandler = () => {
-  //   if (card.visible) {
-  //     setAnimationClass(`card-tile-${card.cardType}`)
-  //     setTimeout(() => {
-  //       checkMatch(() => {
-  //         flipping.current = false // Do this afterwards to prevent attempts to click on a card that is visible but mismatched
-  //       })
-  //     }, OUTCOME_DELAY)
-  //   } else {
-  //     setAnimationClass('card-tile-hidden')
-  //     flipping.current = false
-  //   }
-  // }
   const mouseOverHandler = () => {
     setSelected(true)
   }

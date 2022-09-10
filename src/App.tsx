@@ -26,46 +26,6 @@ const App = () => {
       window.removeEventListener('resize', resizeHandler)
     }
   })
-  // const flipCardHandler = (cardToFlip: Card) => {
-  //   const cardsNext = [...cards]
-  //   cardsNext[cardToFlip.key] = {
-  //     ...cardToFlip,
-  //     visible: true
-  //   }
-  //   setCards(cardsNext)
-  // }
-  // const checkMatch = (cb: () => void) => {
-  //   const candidates = findCandidates(cards)
-  //   if (!candidates) return
-  //   const [c1, c2] = candidates
-  //   const matched = c1.cardType === c2.cardType
-  //   if (matched) {
-  //     if (c1.cardType === CardType.Coins10 || c1.cardType === CardType.Coins20) {
-  //       playCoinSound()
-  //     } else if (c1.cardType === CardType.OneUp) {
-  //       playOneUpSound()
-  //     } else {
-  //       playMatchCorrectSound()
-  //     }
-  //   } else {
-  //     playMatchIncorrectSound()
-  //   }
-  //   setTimeout(() => {
-  //     const cardsNext = [...cards]
-  //     cardsNext[c1.key] = {
-  //       ...c1,
-  //       matched,
-  //       visible: matched
-  //     }
-  //     cardsNext[c2.key] = {
-  //       ...c2,
-  //       matched,
-  //       visible: matched
-  //     }
-  //     setCards(cardsNext)
-  //     cb()
-  //   }, matched ? 0 : FLIP_BACK_DELAY)
-  // }
   return (
     <div
       className="app"
