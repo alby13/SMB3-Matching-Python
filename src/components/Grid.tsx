@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { FLIP_DURATION, OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
 import { Card } from '../domain/Card'
 import { CardType } from '../domain/CardType'
-import { playSelectSound } from '../SoundSystem'
+import { playMatchCorrectSound, playMatchIncorrectSound, playSelectSound } from '../SoundSystem'
 import CardTile from './CardTile'
 
 const patterns = [
@@ -27,11 +28,45 @@ const cards1 = (() => {
   return cards
 })
 
+// TODO: DRY
+function markCardsAsMatched(cards: Card[], key1: number, key2: number) {
+  return cards.map(card => {
+    if (card.key === key1 || card.key === key2) {
+      return { ...card, matched: true }
+    } else {
+      return card
+    }
+  })
+}
+
+// TODO: DRY
+function hideCards(cards: Card[], key1: number, key2: number) {
+  return cards.map(card => {
+    if (card.key === key1 || card.key === key2) {
+      return { ...card, visible: false }
+    } else {
+      return card
+    }
+  })
+}
+
+// TODO: DRY
+function setCardFlipping(flippingBack: boolean, cards: Card[], key1: number, key2: number) {
+  return cards.map(card => {
+    if (card.key === key1 || card.key === key2) {
+      return { ...card, flippingBack }
+    } else {
+      return card
+    }
+  })
+}
+
 const Grid = () => {
   const [cards, setCards] = useState(cards1)
   const [otherCardKey, setOtherCardKey] = useState<number | null>(null)
+  const [flipKey, setFlipKey] = useState<number>(-1)
   const flipCardHandler = (key: number) => {
-    let cardsNext = cards
+    let cardsNext = cards.map(card => card)
     cardsNext = cardsNext.map(card => card.key === key ? { ...card, visible: true } : card)
     if (otherCardKey === null) {
       setOtherCardKey(key)
@@ -39,15 +74,12 @@ const Grid = () => {
       const cardA = cards[otherCardKey]
       const cardB = cards[key]
       if (cardA.cardType === cardB.cardType) {
-        cardsNext = cardsNext.map((card) => {
-          if (card.key === key || card.key === otherCardKey) {
-            return { ...card, matched: true }
-          } else {
-            return card
-          }
-        })
+        cardsNext = markCardsAsMatched(cardsNext, cardA.key, cardB.key)
+        setTimeout(() => playMatchCorrectSound(), OUTCOME_SOUND_DELAY)
       } else {
-        console.log('TODO: Mismatch')
+        cardsNext = setCardFlipping(true, cardsNext, cardA.key, cardB.key)
+        setTimeout(() => playMatchIncorrectSound(), OUTCOME_SOUND_DELAY)
+        setTimeout(() => console.log('HIDE NOW', Date.now()), OUTCOME_FLIP_BACK_DELAY)
       }
       setOtherCardKey(null)
     }
