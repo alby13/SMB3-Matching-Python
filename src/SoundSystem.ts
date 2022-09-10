@@ -5,6 +5,7 @@ import coinUrl from './assets/coin.wav'
 import matchCorrectUrl from './assets/match_correct.wav'
 import matchIncorrectUrl from './assets/match_incorrect.wav'
 import selectUrl from './assets/select.wav'
+import { CardType } from './domain/CardType'
 
 type Sfx = {
   url: string,
@@ -73,16 +74,14 @@ export function playClearWorseSound() {
   playSound(clearWorseUrl)
 }
 
-export function playOneUpSound() {
-  playSound(oneUpUrl)
-}
-
-export function playCoinSound() {
-  playSound(coinUrl)
-}
-
-export function playMatchCorrectSound() {
-  playSound(matchCorrectUrl)
+export function playMatchCorrectSound(cardType: CardType) {
+  if (cardType === CardType.Coins10 || cardType === CardType.Coins20) {
+    playSound(coinUrl)
+  } else if (cardType === CardType.OneUp) {
+    playSound(oneUpUrl)
+  } else {
+    playSound(matchCorrectUrl)
+  }
 }
 
 export function playMatchIncorrectSound() {

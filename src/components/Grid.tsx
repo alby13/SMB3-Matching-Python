@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FLIP_DURATION, OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
 import { Card } from '../domain/Card'
 import { CardType } from '../domain/CardType'
@@ -64,7 +64,13 @@ function setCardFlipping(flippingBack: boolean, cards: Card[], key1: number, key
 const Grid = () => {
   const [cards, setCards] = useState(cards1)
   const [otherCardKey, setOtherCardKey] = useState<number | null>(null)
-  const [flipKey, setFlipKey] = useState<number>(-1)
+  const [pairToHide, setPairToHide] = useState<[number, number]>([-1, -1])
+  useEffect(() => {
+    // Have to do this here so that the setTimeout() callback can get the latest cards array
+    let cardsNext = hideCards(cards, pairToHide[0], pairToHide[1])
+    cardsNext = setCardFlipping(false, cardsNext, pairToHide[0], pairToHide[1])
+    setCards(cardsNext)
+  }, [pairToHide])
   const flipCardHandler = (key: number) => {
     let cardsNext = cards.map(card => card)
     cardsNext = cardsNext.map(card => card.key === key ? { ...card, visible: true } : card)
@@ -75,11 +81,11 @@ const Grid = () => {
       const cardB = cards[key]
       if (cardA.cardType === cardB.cardType) {
         cardsNext = markCardsAsMatched(cardsNext, cardA.key, cardB.key)
-        setTimeout(() => playMatchCorrectSound(), OUTCOME_SOUND_DELAY)
+        setTimeout(() => playMatchCorrectSound(cardA.cardType), OUTCOME_SOUND_DELAY)
       } else {
         cardsNext = setCardFlipping(true, cardsNext, cardA.key, cardB.key)
         setTimeout(() => playMatchIncorrectSound(), OUTCOME_SOUND_DELAY)
-        setTimeout(() => console.log('HIDE NOW', Date.now()), OUTCOME_FLIP_BACK_DELAY)
+        setTimeout(() => setPairToHide([cardA.key, cardB.key]), OUTCOME_FLIP_BACK_DELAY)
       }
       setOtherCardKey(null)
     }
