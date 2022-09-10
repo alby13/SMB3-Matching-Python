@@ -3,7 +3,6 @@ import cardsUrl from '../assets/cards.png'
 import selectorUrl from '../assets/selector.png'
 import { FLIP_DURATION } from '../constants'
 import { Card } from '../domain/Card'
-import { playSelectSound } from '../SoundSystem'
 
 type Props = {
   card: Card
@@ -22,7 +21,6 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler  }) => {
       return
     }
     if (card.visible) {
-      playSelectSound()
       setAnimationClass('card-tile-flip-forward')
       setTimeout(() => { setAnimationClass(`card-tile-${card.cardType}`) }, FLIP_DURATION)
     } else {

@@ -8,7 +8,8 @@ import selectUrl from './assets/select.wav'
 
 type Sfx = {
   url: string,
-  promise: Promise<ArrayBuffer>
+  promise: Promise<ArrayBuffer>,
+  source: AudioBufferSourceNode | null
 }
 
 const soundUrls = [
@@ -26,7 +27,8 @@ const sfxMap = new Map<string, Sfx>()
 for (let url of soundUrls) {
   sfxMap.set(url, {
     url,
-    promise: fetch(url).then(res => res.arrayBuffer())
+    promise: fetch(url).then(res => res.arrayBuffer()),
+    source: null
   })
 }
 
@@ -38,15 +40,16 @@ async function ensureSoundLoaded(url: string) {
   }
   const sfx = sfxMap.get(url)
   if (!sfx) return null
-  const source = audioContext.createBufferSource()
-  source.buffer = await sfx.promise.then(bytes => {
-    if (audioContext) {
-      source.connect(audioContext.destination)
+  if (sfx.source) sfx.source.stop() // Prevent amplifying by allowing only one at a time
+  sfx.source = audioContext.createBufferSource()
+  sfx.source.buffer = await sfx.promise.then(bytes => {
+    if (audioContext && sfx.source) {
+      sfx.source.connect(audioContext.destination)
       return audioContext.decodeAudioData(bytes.slice(0))
     }
     return null
   })
-  return source
+  return sfx.source
 }
 
 /**

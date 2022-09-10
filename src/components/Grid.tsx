@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Card } from '../domain/Card'
 import { CardType } from '../domain/CardType'
+import { playSelectSound } from '../SoundSystem'
 import CardTile from './CardTile'
 
 const patterns = [
@@ -32,6 +33,7 @@ const Grid = () => {
   const flipCardHandler = (key: number) => {
     let cardsNext = cards.map(card => card.key === key ? { ...card, visible: true } : card)
     setCards(cardsNext)
+    playSelectSound()
   }
   return (
     <div className="grid">
