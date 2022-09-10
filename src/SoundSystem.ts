@@ -1,6 +1,5 @@
 import oneUpUrl from './assets/1up.wav'
-import clearBetterUrl from './assets/clear_better.wav'
-import clearWorseUrl from './assets/clear_worse.wav'
+import clearUrl from './assets/clear.wav'
 import coinUrl from './assets/coin.wav'
 import matchCorrectUrl from './assets/match_correct.wav'
 import matchIncorrectUrl from './assets/match_incorrect.wav'
@@ -15,8 +14,7 @@ type Sfx = {
 
 const soundUrls = [
   oneUpUrl,
-  clearBetterUrl,
-  clearWorseUrl,
+  clearUrl,
   coinUrl,
   matchCorrectUrl,
   matchIncorrectUrl,
@@ -66,12 +64,8 @@ async function playSound(url: string) {
   })
 }
 
-export function playClearBetterSound() {
-  playSound(clearBetterUrl)
-}
-
-export function playClearWorseSound() {
-  playSound(clearWorseUrl)
+export function playClearSound() {
+  playSound(clearUrl)
 }
 
 export function playMatchCorrectSound(cardType: CardType) {
