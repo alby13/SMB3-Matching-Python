@@ -6,22 +6,82 @@ import { playMatchCorrectSound, playMatchIncorrectSound, playSelectSound } from 
 import CardTile from './CardTile'
 
 const patterns = [
-  [
-    CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Star,
-    CardType.Flower, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Coins20,
-    CardType.Star, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
-  ]
+  {
+    cardBackgroundColor: '#ffcec6',
+    cards: [
+      CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Star,
+      CardType.Flower, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Coins20,
+      CardType.Star, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
+  {
+    cardBackgroundColor: "#88ccee",
+    cards: [
+      CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Flower, CardType.Coins10, CardType.Star,
+      CardType.Coins20, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Flower,
+      CardType.Star, CardType.Mushroom, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
+  {
+    cardBackgroundColor: "#332288",
+    cards: [
+      CardType.Mushroom, CardType.Flower, CardType.OneUp, CardType.Flower, CardType.Star, CardType.Star,
+      CardType.Coins20, CardType.Star, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Flower,
+      CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
+  {
+    cardBackgroundColor: "#117733",
+    cards: [
+      CardType.Flower, CardType.Coins10, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
+      CardType.Star, CardType.Mushroom, CardType.Coins20, CardType.Star, CardType.Mushroom, CardType.Coins10,
+      CardType.Star, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
+  {
+    cardBackgroundColor: "#44aa99",
+    cards: [
+      CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Star, CardType.OneUp, CardType.Flower,
+      CardType.OneUp, CardType.Flower, CardType.Coins10, CardType.Mushroom, CardType.Coins20, CardType.Star,
+      CardType.Mushroom, CardType.Coins10, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
+  {
+    cardBackgroundColor: "#ddcc77",
+    cards: [
+      CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.Coins20, CardType.Mushroom,
+      CardType.Coins10, CardType.Mushroom, CardType.Coins20, CardType.OneUp, CardType.Mushroom, CardType.Coins10,
+      CardType.Star, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
+  {
+    cardBackgroundColor: "#cc6677",
+    cards: [
+      CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
+      CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Coins10,
+      CardType.Star, CardType.Coins20, CardType.Coins20, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
+  {
+    cardBackgroundColor: "#882255",
+    cards: [
+      CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star,
+      CardType.Mushroom, CardType.Coins10, CardType.Star, CardType.Coins20, CardType.Coins20, CardType.Flower,
+      CardType.Star, CardType.OneUp, CardType.Flower, CardType.Mushroom, CardType.Flower, CardType.Star
+    ]
+  },
 ]
 
 const cards1 = (() => {
   const cards = []
-  for (let i = 0; i < patterns[0].length; i++) {
+  for (let i = 0; i < patterns[0].cards.length; i++) {
     const card: Card = {
       key: i,
-      cardType: patterns[0][i],
+      cardType: patterns[0].cards[i],
       visible: false,
       matched: false,
-      flippingBack: false
+      flippingBack: false,
+      backgroundColor: patterns[0].cardBackgroundColor
     }
     cards[i] = card
   }

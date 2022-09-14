@@ -55,6 +55,7 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler  }) => {
       <img
         draggable="false"
         className={`card-tile ${animationClass}`}
+        style={{ backgroundColor: card.backgroundColor }}
         src={cardsUrl}
       />
     </div>

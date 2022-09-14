@@ -5,5 +5,6 @@ export interface Card {
   cardType: CardType,
   visible: boolean,
   matched: boolean,
-  flippingBack: boolean
+  flippingBack: boolean,
+  backgroundColor: string
 }
