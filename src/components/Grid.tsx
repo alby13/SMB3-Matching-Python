@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
 import { Card } from '../domain/Card'
-import { createCards, patterns } from '../domain/CardsFactory'
+import { createCards, patterns } from '../domain/cards-factory'
 import { playMatchCorrectSound, playMatchIncorrectSound, playSelectSound } from '../SoundSystem'
 import CardTile from './CardTile'
 
