@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ENV_REVEAL_MUSIC_DELAY } from '../constants'
 import { Puzzle } from '../domain/Puzzle'
-import { playClearSound } from '../SoundSystem'
+import { playClearSound, stopClearSound } from '../SoundSystem'
 
 type Props = {
   puzzle: Puzzle
@@ -21,6 +21,10 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
     console.log(visible)
   }, [visible])
   if (!visible) return null
+  const handleOnClick = () => {
+    stopClearSound()
+    onContinue()
+  }
   return (
     <div className={`end-screen ${animationClass}`}>
       <div className="end-screen-header">
@@ -59,7 +63,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
           </tbody>
         </table>
         <button
-          onClick={onContinue}
+          onClick={handleOnClick}
           style={{
             color: '#3fbfff',
             fontFamily: 'inherit',

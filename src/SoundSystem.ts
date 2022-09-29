@@ -68,6 +68,12 @@ export function playClearSound() {
   playSound(clearUrl)
 }
 
+export function stopClearSound() {
+  const sfx = sfxMap.get(clearUrl)
+  if (!sfx) return
+  if (sfx.source) sfx.source.stop()
+}
+
 export function playMatchCorrectSound(cardType: CardType) {
   if (cardType === CardType.Coins10 || cardType === CardType.Coins20) {
     playSound(coinUrl)
