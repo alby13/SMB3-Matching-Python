@@ -5,7 +5,8 @@ A Super Mario Bros 3 match game clone
 ## Credits
 
 * Graphics - https://www.spriters-resource.com/nes/supermariobros3/sheet/105023/
-  * Background color scheme (Tol) - https://davidmathlogic.com/colorblind/
+  * Background color scheme - https://davidmathlogic.com/colorblind/
+  * Color lightener - https://pinetools.com/lighten-color
 * Card Layouts - https://www.mariowiki.com/N-Mark_Spade_Panel
 * Sound Effects - https://themushroomkingdom.net/media/smb3/wav
 * Font - https://www.dafont.com/super-mario-bros-3.font by [david-fens.d5063](https://www.dafont.com/david-fens.d5063), converted to WOFF2 by https://transfonter.org/
