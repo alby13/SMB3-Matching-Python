@@ -1,13 +1,14 @@
 import React from 'react'
+import { Puzzle } from '../domain/Puzzle'
 
 type Props = {
+  puzzle: Puzzle
   visible: boolean
+  onContinue: () => void
 }
 
-const EndScreen: React.FC<Props> = ({ visible }) => {
+const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
   if (!visible) return null
-  const patternName = 'a'
-  const patternColor = '#ffcec6'
   return (
     <div className="end-screen">
       <div className="end-screen-header">
@@ -16,10 +17,10 @@ const EndScreen: React.FC<Props> = ({ visible }) => {
           style={{
             marginLeft: '6px',
             marginRight: '6px',
-            color: patternColor
+            color: puzzle.pattern.cardBackgroundColor
           }}
         >
-          {patternName}
+          {puzzle.pattern.name}
         </span>
         complete
       </div>
@@ -36,16 +37,17 @@ const EndScreen: React.FC<Props> = ({ visible }) => {
             <tr>
               <td>moves</td>
               <td>32</td>
-              <td>19</td>
+              <td>TBD</td>
             </tr>
             <tr>
               <td>time</td>
               <td>54</td>
-              <td>43</td>
+              <td>TBD</td>
             </tr>
           </tbody>
         </table>
         <button
+          onClick={onContinue}
           style={{
             color: '#3fbfff',
             fontFamily: 'inherit',

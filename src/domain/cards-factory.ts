@@ -1,13 +1,15 @@
 import { Card } from './Card'
 import { CardType } from './CardType'
 
-type Pattern = {
+export type Pattern = {
+  name: string,
   cardBackgroundColor: string
   cards: CardType[]
 }
 
 export const patterns: Pattern[] = [
   {
+    name: 'a',
     cardBackgroundColor: '#ffcec6',
     cards: [
       CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Star,
@@ -16,6 +18,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
+    name: 'b',
     cardBackgroundColor: "#88ccee",
     cards: [
       CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Flower, CardType.Coins10, CardType.Star,
@@ -24,6 +27,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
+    name: 'c',
     cardBackgroundColor: "#332288",
     cards: [
       CardType.Mushroom, CardType.Flower, CardType.OneUp, CardType.Flower, CardType.Star, CardType.Star,
@@ -32,6 +36,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
+    name: 'd',
     cardBackgroundColor: "#117733",
     cards: [
       CardType.Flower, CardType.Coins10, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
@@ -40,6 +45,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
+    name: 'e',
     cardBackgroundColor: "#44aa99",
     cards: [
       CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Star, CardType.OneUp, CardType.Flower,
@@ -48,6 +54,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
+    name: 'f',
     cardBackgroundColor: "#ddcc77",
     cards: [
       CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.Coins20, CardType.Mushroom,
@@ -56,6 +63,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
+    name: 'g',
     cardBackgroundColor: "#cc6677",
     cards: [
       CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
@@ -64,6 +72,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
+    name: 'h',
     cardBackgroundColor: "#882255",
     cards: [
       CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star,

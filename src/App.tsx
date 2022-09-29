@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import stripesUrl from './assets/stripes.png'
 import EndScreen from './components/EndScreen'
 import Grid from './components/Grid'
+import { Card } from './domain/Card'
+import { createCards, Pattern, patterns } from './domain/cards-factory'
+import { Puzzle } from './domain/Puzzle'
 
 function calculateScale(width: number, height: number): number {
   const ratio = (width || 1) / (height || 1)
@@ -22,6 +25,11 @@ const enum GameState {
 const App = () => {
   const [scale, setScale] = useState(1)
   const [iwin, setIwin] = useState(0)
+  const [currentPuzzle, setCurrentPuzzle] = useState<Puzzle>({
+    pattern: patterns[0],
+    moves: 0,
+    time: 0
+  })
   const [gameState, setGameState] = useState(GameState.InPlay)
   useEffect(() => {
     const resizeHandler = () => {
@@ -42,6 +50,9 @@ const App = () => {
   const handlePatternCompleted = () => {
     setGameState(GameState.PatternCompleted)
   }
+  const handleContinue = () => {
+    setGameState(GameState.InPlay)
+  }
   return (
     <div
       className="app"
@@ -50,8 +61,15 @@ const App = () => {
         transform: `scale(${scale})`
       }}
     >
-      <Grid iwin={iwin} onPatternCompleted={handlePatternCompleted} />
-      <EndScreen visible={gameState === GameState.PatternCompleted} />
+      <Grid
+        iwin={iwin}
+        onPatternCompleted={handlePatternCompleted}
+      />
+      <EndScreen
+        puzzle={currentPuzzle}
+        visible={gameState === GameState.PatternCompleted}
+        onContinue={handleContinue}
+      />
     </div>
   )
 }
