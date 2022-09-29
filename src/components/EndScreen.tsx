@@ -18,7 +18,6 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
     } else {
       setAnimationClass('')
     }
-    console.log(visible)
   }, [visible])
   if (!visible) return null
   const handleOnClick = () => {
