@@ -10,7 +10,7 @@ myFont.load().then(() => {
 })
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  // <React.StrictMode>
+  // <React.StrictMode> // Commented out to allow one-time useEffect hooks to work
     <App />
-  // </React.StrictMode>
+  // </React.StrictMode> // Commented out to allow one-time useEffect hooks to work
 )

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
 import { Card } from '../domain/Card'
 import { createCards, patterns } from '../domain/cards-factory'
@@ -26,7 +26,11 @@ function setCardFlipping(flippingBack: boolean, cards: Card[], key1: number, key
   return cards.map(card => (card.key === key1 || card.key === key2) ? { ...card, flippingBack } : card)
 }
 
-const Grid = () => {
+type Props = {
+  iwin: number
+}
+
+const Grid: React.FC<Props> = ({ iwin }) => {
   const [cards, setCards] = useState(createCards(patterns[0]))
   const [otherCardKey, setOtherCardKey] = useState<number | null>(null)
   const [pairToHide, setPairToHide] = useState<[number | null, number | null]>([null, null])
@@ -40,6 +44,11 @@ const Grid = () => {
     cardsNext = setCardFlipping(false, cardsNext, pairToHide[0], pairToHide[1])
     setCards(cardsNext)
   }, [pairToHide])
+  useEffect(() => {
+    if (iwin < 1) return // Prevent iwin on app start
+    const cardsNext = cards.map(card => ({ ...card, visible: true, matched: true }))
+    setCards(cardsNext)
+  }, [iwin])
   const flipCardHandler = (key: number) => {
     let cardsNext = cards.slice()
     cardsNext = cardsNext.map(card => card.key === key ? { ...card, visible: true } : card)

@@ -16,6 +16,7 @@ function calculateScale(width: number, height: number): number {
 
 const App = () => {
   const [scale, setScale] = useState(1)
+  const [iwin, setIwin] = useState(0)
   useEffect(() => {
     const resizeHandler = () => {
       const newScale = calculateScale(window.innerWidth, window.innerHeight)
@@ -27,6 +28,11 @@ const App = () => {
       window.removeEventListener('resize', resizeHandler)
     }
   })
+  useEffect(() => {
+    (window as any).iwin = () => {
+      setIwin(iwin + 1)
+    }
+  }, [])
   return (
     <div
       className="app"
@@ -35,7 +41,7 @@ const App = () => {
         transform: `scale(${scale})`
       }}
     >
-      <Grid />
+      <Grid iwin={iwin} />
       <EndScreen visible={false} />
     </div>
   )
