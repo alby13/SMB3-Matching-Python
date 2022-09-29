@@ -36,12 +36,12 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
           <tbody>
             <tr>
               <td>moves</td>
-              <td>32</td>
+              <td>{puzzle.moves}</td>
               <td>TBD</td>
             </tr>
             <tr>
               <td>time</td>
-              <td>54</td>
+              <td>{puzzle.time}</td>
               <td>TBD</td>
             </tr>
           </tbody>

@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import stripesUrl from './assets/stripes.png'
 import EndScreen from './components/EndScreen'
 import Grid from './components/Grid'
-import { Card } from './domain/Card'
-import { createCards, Pattern, patterns } from './domain/cards-factory'
+import { patterns } from './domain/cards-factory'
+import { GameState } from './domain/GameState'
 import { Puzzle } from './domain/Puzzle'
 
 function calculateScale(width: number, height: number): number {
@@ -17,16 +17,15 @@ function calculateScale(width: number, height: number): number {
   }
 }
 
-const enum GameState {
-  InPlay,
-  PatternCompleted
-}
+// Global variable, only used for debugging along with iwin() (see below)
+(window as any).iwincount = 0
 
 const App = () => {
   const [scale, setScale] = useState(1)
   const [iwin, setIwin] = useState(0)
+  const currentPatternIndex = useRef(0)
   const [currentPuzzle, setCurrentPuzzle] = useState<Puzzle>({
-    pattern: patterns[0],
+    pattern: patterns[currentPatternIndex.current],
     moves: 0,
     time: 0
   })
@@ -44,14 +43,25 @@ const App = () => {
   })
   useEffect(() => {
     (window as any).iwin = () => {
-      setIwin(iwin + 1)
+      (window as any).iwincount++
+      setIwin((window as any).iwincount)
     }
   }, [])
   const handlePatternCompleted = () => {
     setGameState(GameState.PatternCompleted)
   }
   const handleContinue = () => {
-    setGameState(GameState.InPlay)
+    currentPatternIndex.current += 1
+    if (currentPatternIndex.current >= patterns.length) {
+      alert('TODO: GAME OVER')
+    } else {
+      setCurrentPuzzle({
+        pattern: patterns[currentPatternIndex.current],
+        moves: 0,
+        time: 0
+      })
+      setGameState(GameState.InPlay)
+    }
   }
   return (
     <div
@@ -62,6 +72,8 @@ const App = () => {
       }}
     >
       <Grid
+        puzzle={currentPuzzle}
+        gameState={gameState}
         iwin={iwin}
         onPatternCompleted={handlePatternCompleted}
       />
