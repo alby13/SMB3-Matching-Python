@@ -116,3 +116,28 @@ body, html {
 .card-tile-oneup {
   object-position: -128px 0;
 }
+
+.end-screen {
+  position: absolute;
+  background-color: #3fbfff;
+  font-family: 'SMB3';
+  font-size: 10px;
+  text-align: center;
+  padding: 8px;
+  border: 4px solid black;
+}
+
+.end-screen-header {
+  font-size: 12px;
+  padding: 6px;
+}
+
+.end-screen-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+}

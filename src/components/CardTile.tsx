@@ -9,7 +9,7 @@ type Props = {
   flipCardHandler: (key: number) => void
 }
 
-const CardTile: React.FC<Props> = ({ card, flipCardHandler  }) => {
+const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
   const didMount = useRef(false)
   const [animationClass, setAnimationClass] = useState('card-tile-hidden')
   const [selected, setSelected] = useState(false)

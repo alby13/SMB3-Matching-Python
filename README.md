@@ -8,6 +8,7 @@ A Super Mario Bros 3 match game clone
 * Card Layouts - https://www.mariowiki.com/N-Mark_Spade_Panel
 * Sound Effects - https://themushroomkingdom.net/media/smb3/wav
 * Music - https://www.mariowiki.com/File:N_Spade_Theme_Super_Mario_Bros_3.oga
+* Font - https://www.dafont.com/super-mario-bros-3.font by [david-fens.d5063](https://www.dafont.com/david-fens.d5063), converted to WOFF2 by https://transfonter.org/
 
 ## Challenges
 

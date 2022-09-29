@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import stripesUrl from './assets/stripes.png'
+import EndScreen from './components/EndScreen'
 import Grid from './components/Grid'
 
 function calculateScale(width: number, height: number): number {
@@ -35,6 +36,7 @@ const App = () => {
       }}
     >
       <Grid />
+      <EndScreen visible={false} />
     </div>
   )
 }
