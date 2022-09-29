@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Puzzle } from '../domain/Puzzle'
 
 type Props = {
@@ -8,9 +8,18 @@ type Props = {
 }
 
 const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
+  const [animationClass, setAnimationClass] = useState('')
+  useEffect(() => {
+    if (visible) {
+      setAnimationClass('end-frame-reveal')
+    } else {
+      setAnimationClass('')
+    }
+    console.log(visible)
+  }, [visible])
   if (!visible) return null
   return (
-    <div className="end-screen">
+    <div className={`end-screen ${animationClass}`}>
       <div className="end-screen-header">
         pattern
         <span

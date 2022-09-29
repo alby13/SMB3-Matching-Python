@@ -82,10 +82,10 @@ body, html {
 
 @keyframes card-tile-flip {
   from {
-    object-position: -32px 0
+    object-position: -32px 0;
   }
   to {
-    object-position: -96px 0
+    object-position: -96px 0;
   }
 }
 
@@ -125,6 +125,23 @@ body, html {
   text-align: center;
   padding: 8px;
   border: 5px solid black; /* Just enough to show only the card background colors */
+  overflow: hidden;
+  height: 0px;
+}
+
+.end-frame-reveal {
+  animation-name: end-frame-reveal;
+  animation-duration: 512ms;
+  animation-fill-mode: forwards;
+}
+
+@keyframes end-frame-reveal {
+  from {
+    height: 0px;
+  }
+  to {
+    height: 109px;
+  }
 }
 
 .end-screen table {
