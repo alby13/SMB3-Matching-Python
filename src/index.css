@@ -126,7 +126,7 @@ body, html {
   padding: 8px;
   border: 5px solid black; /* Just enough to show only the card background colors */
   overflow: hidden;
-  height: 0px;
+  transform: scaleY(0) /* See end-frame-reveal animation */
 }
 
 .end-frame-reveal {
@@ -137,10 +137,10 @@ body, html {
 
 @keyframes end-frame-reveal {
   from {
-    height: 0px;
+    transform: scaleY(0)
   }
   to {
-    height: 109px;
+    transform: scaleY(1)
   }
 }
 
