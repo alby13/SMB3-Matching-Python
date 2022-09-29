@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
+import { OUTCOME_AFTER_SOUND_PLAYED, OUTCOME_FLIP_BACK_DELAY, OUTCOME_SOUND_DELAY } from '../constants'
 import { Card } from '../domain/Card'
 import { createCards, patterns } from '../domain/cards-factory'
 import { playMatchCorrectSound, playMatchIncorrectSound, playSelectSound } from '../SoundSystem'
@@ -26,14 +26,22 @@ function setCardFlipping(flippingBack: boolean, cards: Card[], key1: number, key
   return cards.map(card => (card.key === key1 || card.key === key2) ? { ...card, flippingBack } : card)
 }
 
-type Props = {
-  iwin: number
+function checkWin(cards: Card[], onPatternCompleted: () => void) {
+  if (cards.every(card => card.matched)) {
+    onPatternCompleted()
+  }
 }
 
-const Grid: React.FC<Props> = ({ iwin }) => {
+type Props = {
+  iwin: number
+  onPatternCompleted: () => void
+}
+
+const Grid: React.FC<Props> = ({ iwin, onPatternCompleted }) => {
   const [cards, setCards] = useState(createCards(patterns[0]))
   const [otherCardKey, setOtherCardKey] = useState<number | null>(null)
   const [pairToHide, setPairToHide] = useState<[number | null, number | null]>([null, null])
+  const [updateStats, setUpdateStats] = useState(0)
   // Have to do this here so that the setTimeout() callback can get the latest cards array
   useEffect(() => {
     if (pairToHide[0] === null || pairToHide[1] === null) {
@@ -44,10 +52,16 @@ const Grid: React.FC<Props> = ({ iwin }) => {
     cardsNext = setCardFlipping(false, cardsNext, pairToHide[0], pairToHide[1])
     setCards(cardsNext)
   }, [pairToHide])
+  // Have to do this here so that the setTimeout() callback can get the latest cards array
+  // NOTE: It is (might be?) possible that an earlier timeout will see the win condition before the one that triggered it, but the timing differences is not too noticeable
+  useEffect(() => {
+    checkWin(cards, onPatternCompleted)
+  }, [updateStats])
   useEffect(() => {
     if (iwin < 1) return // Prevent iwin on app start
     const cardsNext = cards.map(card => ({ ...card, visible: true, matched: true }))
     setCards(cardsNext)
+    checkWin(cardsNext, onPatternCompleted)
   }, [iwin])
   const flipCardHandler = (key: number) => {
     let cardsNext = cards.slice()
@@ -60,10 +74,14 @@ const Grid: React.FC<Props> = ({ iwin }) => {
       if (cardA.cardType === cardB.cardType) {
         cardsNext = markCardsAsMatched(cardsNext, cardA.key, cardB.key)
         setTimeout(() => playMatchCorrectSound(cardA.cardType), OUTCOME_SOUND_DELAY)
+        setTimeout(() => setUpdateStats(Math.random()), OUTCOME_AFTER_SOUND_PLAYED) // lol
       } else {
         cardsNext = setCardFlipping(true, cardsNext, cardA.key, cardB.key)
         setTimeout(() => playMatchIncorrectSound(), OUTCOME_SOUND_DELAY)
-        setTimeout(() => setPairToHide([cardA.key, cardB.key]), OUTCOME_FLIP_BACK_DELAY)
+        setTimeout(() => {
+          setPairToHide([cardA.key, cardB.key])
+          setUpdateStats(Math.random()) // lol
+        }, OUTCOME_FLIP_BACK_DELAY)
       }
       setOtherCardKey(null)
     }

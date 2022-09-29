@@ -124,7 +124,11 @@ body, html {
   font-size: 10px;
   text-align: center;
   padding: 8px;
-  border: 4px solid black;
+  border: 5px solid black; /* Just enough to show only the card background colors */
+}
+
+.end-screen table {
+  width: 100%;
 }
 
 .end-screen-header {
