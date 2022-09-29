@@ -52,7 +52,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
             color: '#3fbfff',
             fontFamily: 'inherit',
             fontSize: '1em',
-            marginTop: '6px'
+            marginTop: '11px'
           }}
         >
           continue
