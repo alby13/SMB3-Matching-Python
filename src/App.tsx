@@ -50,6 +50,9 @@ const App = () => {
   const handlePatternCompleted = () => {
     setGameState(GameState.PatternCompleted)
   }
+  const handleMove = () => {
+    setCurrentPuzzle({ ...currentPuzzle, moves: currentPuzzle.moves + 1 })
+  }
   const handleContinue = () => {
     currentPatternIndex.current += 1
     if (currentPatternIndex.current >= patterns.length) {
@@ -76,6 +79,7 @@ const App = () => {
         gameState={gameState}
         iwin={iwin}
         onPatternCompleted={handlePatternCompleted}
+        onMove={handleMove}
       />
       <EndScreen
         puzzle={currentPuzzle}

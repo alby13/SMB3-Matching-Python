@@ -39,9 +39,10 @@ type Props = {
   gameState: GameState
   iwin: number
   onPatternCompleted: () => void
+  onMove: () => void
 }
 
-const Grid: React.FC<Props> = ({ puzzle, gameState, iwin, onPatternCompleted }) => {
+const Grid: React.FC<Props> = ({ puzzle, gameState, iwin, onPatternCompleted, onMove }) => {
   const [cards, setCards] = useState(createCards(puzzle.pattern))
   const [otherCardKey, setOtherCardKey] = useState<number | null>(null)
   const [pairToHide, setPairToHide] = useState<[number | null, number | null]>([null, null])
@@ -76,6 +77,7 @@ const Grid: React.FC<Props> = ({ puzzle, gameState, iwin, onPatternCompleted }) 
     checkWin(cardsNext, onPatternCompleted)
   }, [iwin])
   const flipCardHandler = (key: number) => {
+    onMove()
     let cardsNext = cards.slice()
     cardsNext = cardsNext.map(card => card.key === key ? { ...card, visible: true } : card)
     if (otherCardKey === null) {
