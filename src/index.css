@@ -130,6 +130,7 @@ body, html {
 }
 
 .end-frame-reveal {
+  animation-delay: 1ms; /* TODO: BANDAID - Prevents iOS Chrome from rendering the component before it gets scaled down, for some reason... no idea why it does it or why this trial-and-error fix prevents it. */
   animation-name: end-frame-reveal;
   animation-duration: 512ms;
   animation-fill-mode: forwards;
