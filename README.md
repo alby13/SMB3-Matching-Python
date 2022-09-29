@@ -14,4 +14,4 @@ A Super Mario Bros 3 match game clone
 ## Challenges
 
 Modifying elements of an array during `setTimeout()` can be tricky because user actions could have modified elements of the same array in a different `setTimeout()` call.
-Workaround: Move the card accesses to a `useEffect()` and have the `setTimeout()` modify the (potentially arbitrary) value that the `useEffect()` is watching.
+Workaround: Move the element accesses to a `useEffect()` and have the `setTimeout()` modify a (potentially arbitrary) value that the `useEffect()` is watching.
