@@ -33,12 +33,23 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
           style={{
             marginLeft: '6px',
             marginRight: '6px',
-            color: puzzle.pattern.cardBackgroundColor
+            color: puzzle.pattern.cardBackgroundColor,
+            textShadow: '-1px 1px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
           }}
         >
           {puzzle.pattern.name}
         </span>
-        complete
+        of
+        <span
+          style={{
+            marginLeft: '6px',
+            marginRight: '6px',
+            color: puzzle.pattern.cardBackgroundColor,
+            textShadow: '-1px 1px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
+          }}
+        >
+          8
+        </span>
       </div>
       <div className="end-screen-detail">
         <table>

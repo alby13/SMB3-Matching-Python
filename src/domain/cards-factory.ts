@@ -9,7 +9,7 @@ export type Pattern = {
 
 export const patterns: Pattern[] = [
   {
-    name: 'a',
+    name: '1',
     cardBackgroundColor: '#ffcec6',
     cards: [
       CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Star,
@@ -18,7 +18,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
-    name: 'b',
+    name: '2',
     cardBackgroundColor: "#88ccee",
     cards: [
       CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Flower, CardType.Coins10, CardType.Star,
@@ -27,7 +27,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
-    name: 'c',
+    name: '3',
     cardBackgroundColor: "#7966d8", // Original: #332288
     cards: [
       CardType.Mushroom, CardType.Flower, CardType.OneUp, CardType.Flower, CardType.Star, CardType.Star,
@@ -36,7 +36,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
-    name: 'd',
+    name: '4',
     cardBackgroundColor: "#117733",
     cards: [
       CardType.Flower, CardType.Coins10, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
@@ -45,7 +45,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
-    name: 'e',
+    name: '5',
     cardBackgroundColor: "#44aa99",
     cards: [
       CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Star, CardType.OneUp, CardType.Flower,
@@ -54,7 +54,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
-    name: 'f',
+    name: '6',
     cardBackgroundColor: "#ddcc77",
     cards: [
       CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.Coins20, CardType.Mushroom,
@@ -63,7 +63,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
-    name: 'g',
+    name: '7',
     cardBackgroundColor: "#cc6677",
     cards: [
       CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
@@ -72,7 +72,7 @@ export const patterns: Pattern[] = [
     ]
   },
   {
-    name: 'h',
+    name: '8',
     cardBackgroundColor: "#d8669f", // Original: #882255
     cards: [
       CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star,
