@@ -13,7 +13,9 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
   const didMount = useRef(false)
   const [animationClass, setAnimationClass] = useState('card-tile-hidden')
   const [selected, setSelected] = useState(false)
+  const visible = useRef(card.visible)
   useEffect(() => {
+    visible.current = card.visible
     // Prevent the flip back animation from running on initial render
     if (!didMount.current) {
       didMount.current = true
@@ -21,10 +23,18 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
     }
     if (card.visible) {
       setAnimationClass('card-tile-flip-forward')
-      setTimeout(() => setAnimationClass(`card-tile-${card.cardType}`), FLIP_DURATION)
+      setTimeout(() => {
+        if (visible.current) {
+          setAnimationClass(`card-tile-${card.cardType}`)
+        }
+      }, FLIP_DURATION)
     } else {
       setAnimationClass('card-tile-flip-backward')
-      setTimeout(() => setAnimationClass('card-tile-hidden'), FLIP_DURATION)
+      setTimeout(() => {
+        if (!visible.current) {
+          setAnimationClass('card-tile-hidden')
+        }
+      }, FLIP_DURATION)
     }
   }, [card.visible])
   const clickHandler = () => {
