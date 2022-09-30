@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { END_REVEAL_BEST_DELAY, END_REVEAL_MUSIC_DELAY } from '../constants'
+import { END_REVEAL_BEST_DELAY, END_REVEAL_MOVES_DELAY, END_REVEAL_MUSIC_DELAY, END_REVEAL_TIME_DELAY } from '../constants'
 import { Puzzle } from '../domain/Puzzle'
 import { playClearSound, stopClearSound } from '../SoundSystem'
 
@@ -27,12 +27,12 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
         if (visibleRef.current) {
           setMovesVisibility('visible')
         }
-      }, 900)
+      }, END_REVEAL_MOVES_DELAY)
       setTimeout(() => {
         if (visibleRef.current) {
           setTimeVisibility('visible')
         }
-      }, 1800)
+      }, END_REVEAL_TIME_DELAY)
       setTimeout(() => {
         if (visibleRef.current) {
           setBestVisibility('visible')
