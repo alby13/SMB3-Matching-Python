@@ -27,7 +27,8 @@ const App = () => {
   const [currentPuzzle, setCurrentPuzzle] = useState<Puzzle>({
     pattern: patterns[currentPatternIndex.current],
     moves: 0,
-    time: 0
+    startTime: 0,
+    endTime: 0
   })
   const [gameState, setGameState] = useState(GameState.InPlay)
   useEffect(() => {
@@ -48,10 +49,19 @@ const App = () => {
     }
   }, [])
   const handlePatternCompleted = () => {
+    setCurrentPuzzle({
+      ...currentPuzzle,
+      endTime: Date.now()
+    })
     setGameState(GameState.PatternCompleted)
   }
   const handleMove = () => {
-    setCurrentPuzzle({ ...currentPuzzle, moves: currentPuzzle.moves + 1 })
+    const startTime = currentPuzzle.startTime === 0 ? Date.now() : currentPuzzle.startTime
+    setCurrentPuzzle({
+      ...currentPuzzle,
+      moves: currentPuzzle.moves + 1,
+      startTime
+    })
   }
   const handleContinue = () => {
     currentPatternIndex.current += 1
@@ -61,7 +71,8 @@ const App = () => {
       setCurrentPuzzle({
         pattern: patterns[currentPatternIndex.current],
         moves: 0,
-        time: 0
+        startTime: 0,
+        endTime: 0
       })
       setGameState(GameState.InPlay)
     }

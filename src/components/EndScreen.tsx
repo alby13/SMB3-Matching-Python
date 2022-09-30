@@ -24,6 +24,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
     stopClearSound()
     onContinue()
   }
+  const secondsElapsed = Math.floor((puzzle.endTime - puzzle.startTime) / 1000)
   return (
     <div className={`end-screen ${animationClass}`}>
       <div className="end-screen-header">
@@ -56,7 +57,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
             </tr>
             <tr>
               <td>time</td>
-              <td>{puzzle.time}</td>
+              <td>{secondsElapsed}</td>
               <td>TBD</td>
             </tr>
           </tbody>
