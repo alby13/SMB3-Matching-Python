@@ -69,8 +69,6 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
     stopClearSound()
     onContinue()
   }
-  const shadowColor = '#fff'
-  const textShadow = `-1px 1px 0 ${shadowColor}, 1px 1px 0 ${shadowColor}, 1px -1px 0 ${shadowColor}, -1px -1px 0 ${shadowColor}`
   return (
     <div className={`end-screen ${animationClass}`}>
       <div className="end-screen-header">
@@ -79,8 +77,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
           style={{
             marginLeft: '6px',
             marginRight: '6px',
-            color: puzzle.pattern.cardBackgroundColor,
-            textShadow: textShadow
+            color: puzzle.pattern.cardBackgroundColor
           }}
         >
           {puzzle.pattern.name}
@@ -90,8 +87,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
           style={{
             marginLeft: '6px',
             marginRight: '6px',
-            color: puzzle.pattern.cardBackgroundColor,
-            textShadow: textShadow
+            color: puzzle.pattern.cardBackgroundColor
           }}
         >
           8
@@ -112,8 +108,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
               <td style={{ visibility: movesVisibility }}>{puzzle.moves}</td>
               <td style={{
                 visibility: bestVisibility,
-                color: puzzle.pattern.cardBackgroundColor,
-                textShadow: textShadow
+                color: puzzle.pattern.cardBackgroundColor
               }}>
                 {bestMoves}
               </td>
@@ -124,8 +119,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
 
               <td style={{
                 visibility: bestVisibility,
-                color: puzzle.pattern.cardBackgroundColor,
-                textShadow: textShadow
+                color: puzzle.pattern.cardBackgroundColor
               }}>
                 {bestTime}
               </td>
