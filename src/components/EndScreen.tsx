@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { END_REVEAL_BEST_DELAY, END_REVEAL_MOVES_DELAY, END_REVEAL_MUSIC_DELAY, END_REVEAL_TIME_DELAY } from '../constants'
 import { Puzzle } from '../domain/Puzzle'
+import { submitScore } from '../high-scores'
 import { playClearSound, stopClearSound } from '../SoundSystem'
 
 type Props = {
@@ -10,11 +11,14 @@ type Props = {
 }
 
 const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
+  const didMount = useRef(false)
   const [animationClass, setAnimationClass] = useState('')
   // These are "any" because React typing doesn't recognize strings for visibility (?)
   const [movesVisibility, setMovesVisibility] = useState<any>('hidden')
   const [timeVisibility, setTimeVisibility] = useState<any>('hidden')
   const [bestVisibility, setBestVisibility] = useState<any>('hidden')
+  const [bestMoves, setBestMoves] = useState('TBD')
+  const [bestTime, setBestTime] = useState('TBD')
   const visibleRef = useRef(visible)
   useEffect(() => {
     visibleRef.current = visible
@@ -45,12 +49,28 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
       setBestVisibility('hidden')
     }
   }, [visible])
+  const secondsElapsed = Math.floor((puzzle.endTime - puzzle.startTime) / 1000)
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true
+      return // Do not run on first run
+    }
+    if (puzzle.startTime > 0) { // Hack to prevent storing zero as the best scores when the next pattern is loaded
+      setTimeout(() => { // Async to prevent unhandleable exception if user has storage turned off
+        submitScore(puzzle.pattern.name, puzzle.moves, secondsElapsed, (recordedBestMoves, recordedBestTime) => {
+          setBestMoves(`${recordedBestMoves}`)
+          setBestTime(`${recordedBestTime}`)
+        })
+      }, 1)
+    }
+  }, [puzzle.endTime])
   if (!visible) return null
   const handleOnClick = () => {
     stopClearSound()
     onContinue()
   }
-  const secondsElapsed = Math.floor((puzzle.endTime - puzzle.startTime) / 1000)
+  const shadowColor = '#fff'
+  const textShadow = `-1px 1px 0 ${shadowColor}, 1px 1px 0 ${shadowColor}, 1px -1px 0 ${shadowColor}, -1px -1px 0 ${shadowColor}`
   return (
     <div className={`end-screen ${animationClass}`}>
       <div className="end-screen-header">
@@ -60,7 +80,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
             marginLeft: '6px',
             marginRight: '6px',
             color: puzzle.pattern.cardBackgroundColor,
-            textShadow: '-1px 1px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
+            textShadow: textShadow
           }}
         >
           {puzzle.pattern.name}
@@ -71,7 +91,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
             marginLeft: '6px',
             marginRight: '6px',
             color: puzzle.pattern.cardBackgroundColor,
-            textShadow: '-1px 1px 0 #fff, 1px 1px 0 #fff, 1px -1px 0 #fff, -1px -1px 0 #fff'
+            textShadow: textShadow
           }}
         >
           8
@@ -90,12 +110,25 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
             <tr>
               <td style={{ visibility: movesVisibility }}>moves</td>
               <td style={{ visibility: movesVisibility }}>{puzzle.moves}</td>
-              <td style={{ visibility: bestVisibility }}>TBD</td>
+              <td style={{
+                visibility: bestVisibility,
+                color: puzzle.pattern.cardBackgroundColor,
+                textShadow: textShadow
+              }}>
+                {bestMoves}
+              </td>
             </tr>
             <tr>
               <td style={{ visibility: timeVisibility }}>time</td>
               <td style={{ visibility: timeVisibility }}>{secondsElapsed}</td>
-              <td style={{ visibility: bestVisibility }}>TBD</td>
+
+              <td style={{
+                visibility: bestVisibility,
+                color: puzzle.pattern.cardBackgroundColor,
+                textShadow: textShadow
+              }}>
+                {bestTime}
+              </td>
             </tr>
           </tbody>
         </table>

@@ -7,6 +7,9 @@ export type Pattern = {
   cards: CardType[]
 }
 
+/**
+ * name values should match high-score.ts names
+ */
 export const patterns: Pattern[] = [
   {
     name: '1',
