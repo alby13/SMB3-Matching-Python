@@ -11,24 +11,37 @@ type Props = {
 
 const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
   const [animationClass, setAnimationClass] = useState('')
-  const [bestVisibility, setBestVisibility] = useState<any>('hidden') // "any" because React typing doesn't recognize the string
+  // These are "any" because React typing doesn't recognize strings for visibility (?)
+  const [movesVisibility, setMovesVisibility] = useState<any>('hidden')
+  const [timeVisibility, setTimeVisibility] = useState<any>('hidden')
+  const [bestVisibility, setBestVisibility] = useState<any>('hidden')
   const visibleRef = useRef(visible)
   useEffect(() => {
     visibleRef.current = visible
     if (visible) {
       setAnimationClass('end-frame-reveal')
       setTimeout(() => playClearSound(), END_REVEAL_MUSIC_DELAY)
-      // TODO: setTimeout() for showing num of moves
-      // TODO: setTimeout() for showing amt of time
+      // Read these timeouts as "if the EndScreen is still visible when the timeout occurs, then it is safe to set it element to visible"
+      // This is ok because the timeout is shorter than the amount of time it takes for a user to get from one EndScreen to another EndScreen
       setTimeout(() => {
-        // Read this as "if the EndScreen is still visible when the timeout occurs, then it is safe to set it to visible"
-        // This is ok because it the timeout is shorter than the amount of time it takes for a user to get from one EndScreen to another EndScreen
+        if (visibleRef.current) {
+          setMovesVisibility('visible')
+        }
+      }, 900)
+      setTimeout(() => {
+        if (visibleRef.current) {
+          setTimeVisibility('visible')
+        }
+      }, 1800)
+      setTimeout(() => {
         if (visibleRef.current) {
           setBestVisibility('visible')
         }
       }, END_REVEAL_BEST_DELAY)
     } else {
       setAnimationClass('')
+      setMovesVisibility('hidden')
+      setTimeVisibility('hidden')
       setBestVisibility('hidden')
     }
   }, [visible])
@@ -75,13 +88,13 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
           </thead>
           <tbody>
             <tr>
-              <td>moves</td>
-              <td>{puzzle.moves}</td>
+              <td style={{ visibility: movesVisibility }}>moves</td>
+              <td style={{ visibility: movesVisibility }}>{puzzle.moves}</td>
               <td style={{ visibility: bestVisibility }}>TBD</td>
             </tr>
             <tr>
-              <td>time</td>
-              <td>{secondsElapsed}</td>
+              <td style={{ visibility: timeVisibility }}>time</td>
+              <td style={{ visibility: timeVisibility }}>{secondsElapsed}</td>
               <td style={{ visibility: bestVisibility }}>TBD</td>
             </tr>
           </tbody>

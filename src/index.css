@@ -160,7 +160,6 @@ body, html {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: 7px;
   padding-left: 6px;
   padding-right: 6px;
 }
