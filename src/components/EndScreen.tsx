@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { END_REVEAL_BEST_DELAY, END_REVEAL_MUSIC_DELAY } from '../constants'
 import { Puzzle } from '../domain/Puzzle'
 import { playClearSound, stopClearSound } from '../SoundSystem'
@@ -12,11 +12,21 @@ type Props = {
 const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
   const [animationClass, setAnimationClass] = useState('')
   const [bestVisibility, setBestVisibility] = useState<any>('hidden') // "any" because React typing doesn't recognize the string
+  const visibleRef = useRef(visible)
   useEffect(() => {
+    visibleRef.current = visible
     if (visible) {
       setAnimationClass('end-frame-reveal')
       setTimeout(() => playClearSound(), END_REVEAL_MUSIC_DELAY)
-      setTimeout(() => setBestVisibility('visible'), END_REVEAL_BEST_DELAY)
+      // TODO: setTimeout() for showing num of moves
+      // TODO: setTimeout() for showing amt of time
+      setTimeout(() => {
+        // Read this as "if the EndScreen is still visible when the timeout occurs, then it is safe to set it to visible"
+        // This is ok because it the timeout is shorter than the amount of time it takes for a user to get from one EndScreen to another EndScreen
+        if (visibleRef.current) {
+          setBestVisibility('visible')
+        }
+      }, END_REVEAL_BEST_DELAY)
     } else {
       setAnimationClass('')
       setBestVisibility('hidden')
