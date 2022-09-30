@@ -119,6 +119,7 @@ body, html {
 
 .end-screen {
   position: absolute;
+  width: 156px;
   background-color: #3fbfff;
   font-family: 'SMB3';
   font-size: 10px;

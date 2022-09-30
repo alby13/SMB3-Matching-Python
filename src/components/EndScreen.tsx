@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { END_REVEAL_MUSIC_DELAY } from '../constants'
+import { END_REVEAL_BEST_DELAY, END_REVEAL_MUSIC_DELAY } from '../constants'
 import { Puzzle } from '../domain/Puzzle'
 import { playClearSound, stopClearSound } from '../SoundSystem'
 
@@ -11,12 +11,15 @@ type Props = {
 
 const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
   const [animationClass, setAnimationClass] = useState('')
+  const [bestVisibility, setBestVisibility] = useState<any>('hidden') // "any" because React typing doesn't recognize the string
   useEffect(() => {
     if (visible) {
       setAnimationClass('end-frame-reveal')
       setTimeout(() => playClearSound(), END_REVEAL_MUSIC_DELAY)
+      setTimeout(() => setBestVisibility('visible'), END_REVEAL_BEST_DELAY)
     } else {
       setAnimationClass('')
+      setBestVisibility('hidden')
     }
   }, [visible])
   if (!visible) return null
@@ -56,20 +59,20 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
           <thead>
             <tr>
               <th></th>
-              <th>current</th>
-              <th>best</th>
+              <th></th>
+              <th style={{ visibility: bestVisibility }}>best</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>moves</td>
               <td>{puzzle.moves}</td>
-              <td>TBD</td>
+              <td style={{ visibility: bestVisibility }}>TBD</td>
             </tr>
             <tr>
               <td>time</td>
               <td>{secondsElapsed}</td>
-              <td>TBD</td>
+              <td style={{ visibility: bestVisibility }}>TBD</td>
             </tr>
           </tbody>
         </table>

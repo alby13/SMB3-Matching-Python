@@ -6,3 +6,4 @@ export const OUTCOME_SOUND_DELAY = 384
 export const OUTCOME_AFTER_SOUND_PLAYED = OUTCOME_SOUND_DELAY + 150
 export const OUTCOME_FLIP_BACK_DELAY = 1280
 export const END_REVEAL_MUSIC_DELAY = 256
+export const END_REVEAL_BEST_DELAY = 2550 // Time until the clear music's final note "hits"
