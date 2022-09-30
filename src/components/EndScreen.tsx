@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ENV_REVEAL_MUSIC_DELAY } from '../constants'
+import { END_REVEAL_MUSIC_DELAY } from '../constants'
 import { Puzzle } from '../domain/Puzzle'
 import { playClearSound, stopClearSound } from '../SoundSystem'
 
@@ -14,7 +14,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
   useEffect(() => {
     if (visible) {
       setAnimationClass('end-frame-reveal')
-      setTimeout(() => playClearSound(), ENV_REVEAL_MUSIC_DELAY)
+      setTimeout(() => playClearSound(), END_REVEAL_MUSIC_DELAY)
     } else {
       setAnimationClass('')
     }
