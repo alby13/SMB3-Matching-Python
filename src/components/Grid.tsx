@@ -4,7 +4,7 @@ import { Card } from '../domain/Card'
 import { createCards } from '../domain/cards-factory'
 import { GameState } from '../domain/GameState'
 import { Puzzle } from '../domain/Puzzle'
-import { playMatchCorrectSound, playMatchIncorrectSound, playSelectSound } from '../SoundSystem'
+import { playMatchCorrectSound, playMatchIncorrectSound, playSelectSound } from '../sound-system'
 import CardTile from './CardTile'
 
 // TODO: DRY

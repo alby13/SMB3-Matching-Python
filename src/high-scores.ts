@@ -52,7 +52,7 @@ export function submitScore(name: string, currentMoves: number, currentTime: num
     if (currentMoves < patternScore.moves) {
       patternScore.moves = currentMoves
     }
-    if (currentTime < patternScore.time) {
+    if (currentTime < patternScore.time && currentTime > 0) { // Greater than zero is to prevent (development-only due to HMR? hopefully?) inconsistent state when locking on mobile
       patternScore.time = currentTime
     }
     console.log('patternScore after', patternScore)
