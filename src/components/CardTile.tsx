@@ -21,24 +21,23 @@ const CardTile: React.FC<Props> = ({ card, flipCardHandler }) => {
       didMount.current = true
       return
     }
+    const applyVisible = () => {
+      if (visible.current) {
+        setAnimationClass(`card-tile-${card.cardType}`)
+      } else {
+        setAnimationClass('card-tile-hidden')
+      }
+    }
     if (card.visible) {
       setAnimationClass('card-tile-flip-forward')
-      setTimeout(() => {
-        if (visible.current) {
-          setAnimationClass(`card-tile-${card.cardType}`)
-        }
-      }, FLIP_DURATION)
+      setTimeout(() => applyVisible(), FLIP_DURATION)
     } else {
       setAnimationClass('card-tile-flip-backward')
-      setTimeout(() => {
-        if (!visible.current) {
-          setAnimationClass('card-tile-hidden')
-        }
-      }, FLIP_DURATION)
+      setTimeout(() => applyVisible(), FLIP_DURATION)
     }
   }, [card.visible])
   const clickHandler = () => {
-    if (!card.visible && !card.flippingBack) {
+    if (!card.visible && !card.matched && !card.flippingBack) {
       flipCardHandler(card.key)
     }
   }
