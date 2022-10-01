@@ -22,7 +22,7 @@ export const patterns: Pattern[] = [
   },
   {
     name: '2',
-    cardBackgroundColor: "#88ccee",
+    cardBackgroundColor: "#c4e6f6", // Original: #88ccee
     cards: [
       CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Flower, CardType.Coins10, CardType.Star,
       CardType.Coins20, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Flower,
