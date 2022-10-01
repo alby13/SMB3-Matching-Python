@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import stripesUrl from './assets/stripes.png'
+import CreditsScreen from './components/CreditsScreen'
 import EndScreen from './components/EndScreen'
 import Grid from './components/Grid'
 import { patterns } from './domain/cards-factory'
@@ -97,6 +98,7 @@ const App = () => {
         visible={gameState === GameState.PatternCompleted}
         onContinue={handleContinue}
       />
+      <CreditsScreen visible={gameState === GameState.AllPatternsCompleted}/>
     </div>
   )
 }

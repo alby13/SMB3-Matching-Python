@@ -1,4 +1,5 @@
 export const enum GameState {
   InPlay,
-  PatternCompleted
+  PatternCompleted,
+  AllPatternsCompleted
 }
