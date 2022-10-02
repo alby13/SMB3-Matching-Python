@@ -1,6 +1,6 @@
 # matching
 
-## [Play in Browser](https://hiddenwaffle.github.io/matching/)
+## Play in Browser: https://hiddenwaffle.github.io/matching/
 
 The Super Mario Bros 3 card matching game, ported to ReactJS
 
@@ -15,8 +15,9 @@ The Super Mario Bros 3 card matching game, ported to ReactJS
 
 ## Challenges
 
-Modifying elements of an array during `setTimeout()` can be tricky because user actions could have modified elements of the same array in a different `setTimeout()` call.
-Workaround: Move the element accesses to a `useEffect()` and have the `setTimeout()` modify a (potentially arbitrary) value that the `useEffect()` is watching.
+* Modifying elements of an array during `setTimeout()` can be tricky because user actions could have modified elements of the same array in a different `setTimeout()` call.
+  * Workaround: Move the element accesses to a `useEffect()` and have the `setTimeout()` modify a (potentially arbitrary) value that the `useEffect()` is watching.
+* Mobile CSS is chaotic and unpredictable
 
 ## Deploy
 
