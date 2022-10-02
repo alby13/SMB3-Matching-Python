@@ -1,6 +1,6 @@
 # matching
 
-A Super Mario Bros 3 match game clone
+The Super Mario Bros 3 card matching game, ported to ReactJS
 
 ## Credits
 
