@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { playGameOverSound } from '../sound-system'
 
 type Props = {
   visible: boolean
@@ -6,15 +7,27 @@ type Props = {
 
 const CreditsScreen: React.FC<Props> = ({ visible }) => {
   if (!visible) return null
+  useEffect(() => {
+    if (visible) {
+      playGameOverSound()
+    }
+  }, [visible])
+  const handleOnClickPlayAgain = () => {
+  }
+  const handleOnClickResetScores = () => {
+  }
   return (
-    <div>
-      TODO:
-        - Thanks for playing
-        - Link to GitHub repo
-        - "Play Again" button
-        - "Reset Scores" button
-        - Animated background and link for https://en.wikipedia.org/wiki/Super_Mario_Clouds
-        - "Falling" music loop X times, fade out via web audio?
+    <div className="credits-screen">
+      <p>game over<br />thanks for playing</p>
+        <button className="list-button" onClick={handleOnClickPlayAgain}>
+          play again
+        </button>
+        <button className="list-button" onClick={handleOnClickResetScores}>
+          view on github&#x2197;
+        </button>
+        <button className="list-button" onClick={handleOnClickResetScores}>
+          reset scores
+        </button>
     </div>
   )
 }

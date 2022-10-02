@@ -11,69 +11,69 @@ export type Pattern = {
  * name values should match high-score.ts names
  */
 export const patterns: Pattern[] = [
-  {
-    name: '1',
-    cardBackgroundColor: '#ffcec6',
-    cards: [
-      CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Star,
-      CardType.Flower, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Coins20,
-      CardType.Star, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
-    ]
-  },
-  {
-    name: '2',
-    cardBackgroundColor: "#c4e6f6", // Original: #88ccee
-    cards: [
-      CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Flower, CardType.Coins10, CardType.Star,
-      CardType.Coins20, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Flower,
-      CardType.Star, CardType.Mushroom, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
-    ]
-  },
-  {
-    name: '3',
-    cardBackgroundColor: "#7966d8", // Original: #332288
-    cards: [
-      CardType.Mushroom, CardType.Flower, CardType.OneUp, CardType.Flower, CardType.Star, CardType.Star,
-      CardType.Coins20, CardType.Star, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Flower,
-      CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star
-    ]
-  },
-  {
-    name: '4',
-    cardBackgroundColor: "#117733",
-    cards: [
-      CardType.Flower, CardType.Coins10, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
-      CardType.Star, CardType.Mushroom, CardType.Coins20, CardType.Star, CardType.Mushroom, CardType.Coins10,
-      CardType.Star, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Flower, CardType.Star
-    ]
-  },
-  {
-    name: '5',
-    cardBackgroundColor: "#44aa99",
-    cards: [
-      CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Star, CardType.OneUp, CardType.Flower,
-      CardType.OneUp, CardType.Flower, CardType.Coins10, CardType.Mushroom, CardType.Coins20, CardType.Star,
-      CardType.Mushroom, CardType.Coins10, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
-    ]
-  },
-  {
-    name: '6',
-    cardBackgroundColor: "#ffc8f6", // Original: #cc6677
-    cards: [
-      CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.Coins20, CardType.Mushroom,
-      CardType.Coins10, CardType.Mushroom, CardType.Coins20, CardType.OneUp, CardType.Mushroom, CardType.Coins10,
-      CardType.Star, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
-    ]
-  },
-  {
-    name: '7',
-    cardBackgroundColor: '#ddcc77',
-    cards: [
-      CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
-      CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Coins10,
-      CardType.Star, CardType.Coins20, CardType.Coins20, CardType.Mushroom, CardType.Flower, CardType.Star
-    ]
-  },
+  // {
+  //   name: '1',
+  //   cardBackgroundColor: '#ffcec6',
+  //   cards: [
+  //     CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Star,
+  //     CardType.Flower, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Coins20,
+  //     CardType.Star, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+  //   ]
+  // },
+  // {
+  //   name: '2',
+  //   cardBackgroundColor: "#c4e6f6", // Original: #88ccee
+  //   cards: [
+  //     CardType.Mushroom, CardType.Flower, CardType.Coins20, CardType.Flower, CardType.Coins10, CardType.Star,
+  //     CardType.Coins20, CardType.OneUp, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Flower,
+  //     CardType.Star, CardType.Mushroom, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+  //   ]
+  // },
+  // {
+  //   name: '3',
+  //   cardBackgroundColor: "#7966d8", // Original: #332288
+  //   cards: [
+  //     CardType.Mushroom, CardType.Flower, CardType.OneUp, CardType.Flower, CardType.Star, CardType.Star,
+  //     CardType.Coins20, CardType.Star, CardType.Mushroom, CardType.Coins10, CardType.OneUp, CardType.Flower,
+  //     CardType.Coins20, CardType.Mushroom, CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star
+  //   ]
+  // },
+  // {
+  //   name: '4',
+  //   cardBackgroundColor: "#117733",
+  //   cards: [
+  //     CardType.Flower, CardType.Coins10, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
+  //     CardType.Star, CardType.Mushroom, CardType.Coins20, CardType.Star, CardType.Mushroom, CardType.Coins10,
+  //     CardType.Star, CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Flower, CardType.Star
+  //   ]
+  // },
+  // {
+  //   name: '5',
+  //   cardBackgroundColor: "#44aa99",
+  //   cards: [
+  //     CardType.Flower, CardType.Coins20, CardType.Mushroom, CardType.Star, CardType.OneUp, CardType.Flower,
+  //     CardType.OneUp, CardType.Flower, CardType.Coins10, CardType.Mushroom, CardType.Coins20, CardType.Star,
+  //     CardType.Mushroom, CardType.Coins10, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+  //   ]
+  // },
+  // {
+  //   name: '6',
+  //   cardBackgroundColor: "#ffc8f6", // Original: #cc6677
+  //   cards: [
+  //     CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.Coins20, CardType.Mushroom,
+  //     CardType.Coins10, CardType.Mushroom, CardType.Coins20, CardType.OneUp, CardType.Mushroom, CardType.Coins10,
+  //     CardType.Star, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Flower, CardType.Star
+  //   ]
+  // },
+  // {
+  //   name: '7',
+  //   cardBackgroundColor: '#ddcc77',
+  //   cards: [
+  //     CardType.Flower, CardType.Star, CardType.OneUp, CardType.Flower, CardType.OneUp, CardType.Mushroom,
+  //     CardType.Coins10, CardType.Mushroom, CardType.Flower, CardType.Star, CardType.Mushroom, CardType.Coins10,
+  //     CardType.Star, CardType.Coins20, CardType.Coins20, CardType.Mushroom, CardType.Flower, CardType.Star
+  //   ]
+  // },
   {
     name: '8',
     cardBackgroundColor: "#d8669f", // Original: #882255

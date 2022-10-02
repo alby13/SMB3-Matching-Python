@@ -67,7 +67,7 @@ const App = () => {
   const handleContinue = () => {
     currentPatternIndex.current += 1
     if (currentPatternIndex.current >= patterns.length) {
-      alert('TODO: This is the end of the game! (Need an ending screen)')
+      setGameState(GameState.AllPatternsCompleted)
     } else {
       setCurrentPuzzle({
         pattern: patterns[currentPatternIndex.current],

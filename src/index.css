@@ -163,3 +163,27 @@ body, html {
   padding-left: 6px;
   padding-right: 6px;
 }
+
+.credits-screen {
+  position: absolute;
+  width: 165px;
+  height: 120px;
+  background-color: #3fbfff;
+  font-family: 'SMB3';
+  font-size: 10px;
+  text-align: center;
+  padding: 6px;
+  border: 5px solid black; /* Just enough to show only the card background colors */
+  overflow: hidden;
+}
+
+.credits-screen p {
+  margin: 0px;
+}
+
+.list-button {
+  color: #3fbfff;
+  font-family: inherit; /* Have to specify this explicitly for buttons for some reason */
+  font-size: 1em;
+  margin-top: 11px;
+}

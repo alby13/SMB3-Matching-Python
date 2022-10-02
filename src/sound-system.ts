@@ -112,6 +112,16 @@ export function stopClearSound() {
   if (sfx.source) sfx.source.stop()
 }
 
+export function playGameOverSound() {
+  playSound(gameOverUrl)
+}
+
+export function stopGameOverSound() {
+  const sfx = sfxMap.get(gameOverUrl)
+  if (!sfx) return
+  if (sfx.source) sfx.source.stop()
+}
+
 export function playMatchCorrectSound(cardType: CardType) {
   if (cardType === CardType.Coins10 || cardType === CardType.Coins20) {
     playSound(coinUrl)

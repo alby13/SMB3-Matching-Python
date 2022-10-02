@@ -126,15 +126,7 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
             </tr>
           </tbody>
         </table>
-        <button
-          onClick={handleOnClick}
-          style={{
-            color: '#3fbfff',
-            fontFamily: 'inherit',
-            fontSize: '1em',
-            marginTop: '11px'
-          }}
-        >
+        <button className="list-button" onClick={handleOnClick}>
           continue
         </button>
       </div>
