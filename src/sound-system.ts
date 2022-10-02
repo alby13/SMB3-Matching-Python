@@ -1,6 +1,7 @@
 import oneUpUrl from './assets/1up.wav'
 import clearUrl from './assets/clear.wav'
 import coinUrl from './assets/coin.wav'
+import gameOverUrl from './assets/game_over.wav'
 import matchCorrectUrl from './assets/match_correct.wav'
 import matchIncorrectUrl from './assets/match_incorrect.wav'
 import selectUrl from './assets/select.wav'
@@ -12,24 +13,46 @@ type Sfx = {
   source: AudioBufferSourceNode | null
 }
 
-const soundUrls = [
+const soundPriorityUrls = [
   oneUpUrl,
-  clearUrl,
   coinUrl,
   matchCorrectUrl,
   matchIncorrectUrl,
   selectUrl
 ]
 
-const sfxMap = new Map<string, Sfx>()
+const soundSecondaryUrls = [
+  clearUrl,
+  gameOverUrl
+]
 
-for (let url of soundUrls) {
-  sfxMap.set(url, {
-    url,
-    promise: fetch(url).then(res => res.arrayBuffer()),
-    source: null
+const sfxMap = new Map<string, Sfx>()
+;
+
+(() => {
+  // Load the smaller sounds first
+  const prioritySoundPromises: Array<Promise<ArrayBuffer>> = []
+  for (let url of soundPriorityUrls) {
+    const promise = fetch(url).then(res => res.arrayBuffer())
+    prioritySoundPromises.push(promise)
+    sfxMap.set(url, {
+      url,
+      promise,
+      source: null
+    })
+  }
+  // Load the longer sounds second
+  Promise.all(prioritySoundPromises).then(() => {
+    for (let url of soundSecondaryUrls) {
+      const promise = fetch(url).then(res => res.arrayBuffer())
+      sfxMap.set(url, {
+        url,
+        promise,
+        source: null
+      })
+    }
   })
-}
+})
 
 let audioContext: AudioContext | null = null
 ;
