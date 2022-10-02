@@ -26,3 +26,7 @@ rm -rf docs
 npm run build
 mv dist docs
 ```
+
+## Why React?
+
+I needed to refresh my memory after having not used it for several years. It would have been better to use Canvas for an app like this.
