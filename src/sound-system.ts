@@ -32,6 +32,18 @@ for (let url of soundUrls) {
 }
 
 let audioContext: AudioContext | null = null
+;
+
+/**
+ * iOS locking and unlocking for a few seconds disables sound
+ * This workaround is ridiculous: https://stackoverflow.com/a/69546084
+ */
+(() => {
+  const el = document.createElement('audio') as HTMLAudioElement
+  el.preload = 'none'
+  el.src = selectUrl
+  document.body.appendChild(el)
+})()
 
 async function ensureSoundLoaded(url: string) {
   if (!audioContext) {
