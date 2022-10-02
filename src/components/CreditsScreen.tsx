@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { playGameOverSound, stopGameOverSound } from '../sound-system'
 
 type Props = {
@@ -7,6 +7,7 @@ type Props = {
 }
 
 const CreditsScreen: React.FC<Props> = ({ visible, onPlayAgain }) => {
+  const [scoresWereReset, setScoresWereReset] = useState(false)
   useEffect(() => {
     if (visible) {
       playGameOverSound()
@@ -18,6 +19,7 @@ const CreditsScreen: React.FC<Props> = ({ visible, onPlayAgain }) => {
     onPlayAgain()
   }
   const handleOnClickResetScores = () => {
+    setScoresWereReset(true)
   }
   return (
     <div className="credits-screen">
@@ -26,15 +28,22 @@ const CreditsScreen: React.FC<Props> = ({ visible, onPlayAgain }) => {
         <p>thanks for playing</p>
       </div>
       <div className="credits-screen-section">
-        <button className="list-button" onClick={handleOnClickPlayAgain}>
+        <button
+          className="list-button"
+          onClick={handleOnClickPlayAgain}
+        >
           play again
         </button>
       </div>
       <div className="credits-screen-section credits-screen-actions">
         <div>
-          <button className="list-button" onClick={handleOnClickResetScores}>
+          {scoresWereReset ? (
+            <div>reset complete<span className="hidden-arrow">&#x2197;</span></div>
+          ) : (
+            <button className="list-button" onClick={handleOnClickResetScores}>
             reset scores
-          </button>
+            </button>
+          )}
         </div>
         <a
           className="list-link"

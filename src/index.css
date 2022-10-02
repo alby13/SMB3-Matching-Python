@@ -206,3 +206,7 @@ body, html {
 .list-link {
   color: #c4e6f6;
 }
+
+.hidden-arrow {
+  visibility: hidden; /* The only reason this exists is to help align the 'RESET COMPLETE' text with the GitHub link on the same line */
+}
