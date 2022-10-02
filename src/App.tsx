@@ -78,6 +78,10 @@ const App = () => {
       setGameState(GameState.InPlay)
     }
   }
+  const handlePlayAgain = () => {
+    currentPatternIndex.current = -1 // NOTE: Leaking abstraction... handleContinue() will increment this
+    handleContinue()
+  }
   return (
     <div
       className="app"
@@ -100,6 +104,7 @@ const App = () => {
       />
       <CreditsScreen
         visible={gameState === GameState.AllPatternsCompleted}
+        onPlayAgain={handlePlayAgain}
       />
     </div>
   )

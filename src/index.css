@@ -202,3 +202,7 @@ body, html {
   font-family: inherit; /* Have to specify this explicitly for buttons for some reason */
   font-size: 1em;
 }
+
+.list-link {
+  color: #c4e6f6;
+}

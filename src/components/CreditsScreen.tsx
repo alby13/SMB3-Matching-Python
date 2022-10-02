@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { playGameOverSound } from '../sound-system'
+import { playGameOverSound, stopGameOverSound } from '../sound-system'
 
 type Props = {
   visible: boolean
+  onPlayAgain: () => void
 }
 
-const CreditsScreen: React.FC<Props> = ({ visible }) => {
+const CreditsScreen: React.FC<Props> = ({ visible, onPlayAgain }) => {
   useEffect(() => {
     if (visible) {
       playGameOverSound()
@@ -13,6 +14,8 @@ const CreditsScreen: React.FC<Props> = ({ visible }) => {
   }, [visible])
   if (!visible) return null
   const handleOnClickPlayAgain = () => {
+    stopGameOverSound()
+    onPlayAgain()
   }
   const handleOnClickResetScores = () => {
   }
@@ -33,11 +36,13 @@ const CreditsScreen: React.FC<Props> = ({ visible }) => {
             reset scores
           </button>
         </div>
-        <div>
-          <button className="list-button" onClick={handleOnClickResetScores}>
-            view on github&#x2197;
-          </button>
-        </div>
+        <a
+          className="list-link"
+          target="_blank"
+          href="https://github.com/hiddenwaffle/matching"
+        >
+          code @github&#x2197;
+        </a>
       </div>
     </div>
   )
