@@ -48,14 +48,12 @@ export function submitScore(name: string, currentMoves: number, currentTime: num
   const scores = readHighScores() as AllHighScores
   const patternScore = (scores as any)[name] as PatternHighScore
   if (patternScore) {
-    console.log('patternScore before', patternScore)
     if (currentMoves < patternScore.moves) {
       patternScore.moves = currentMoves
     }
     if (currentTime < patternScore.time && currentTime > 0) { // Greater than zero is to prevent (development-only due to HMR? hopefully?) inconsistent state when locking on mobile
       patternScore.time = currentTime
     }
-    console.log('patternScore after', patternScore)
   } else {
     (scores as any)[name] = {
       moves: currentMoves,
@@ -64,4 +62,8 @@ export function submitScore(name: string, currentMoves: number, currentTime: num
   }
   writeHighScores(scores)
   callback(patternScore.moves, patternScore.time)
+}
+
+export function resetScores() {
+  localStorage.removeItem(STORAGE_KEY)
 }

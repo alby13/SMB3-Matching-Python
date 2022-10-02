@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { resetScores } from '../high-scores'
 import { playGameOverSound, stopGameOverSound } from '../sound-system'
 
 type Props = {
@@ -9,6 +10,7 @@ type Props = {
 const CreditsScreen: React.FC<Props> = ({ visible, onPlayAgain }) => {
   const [scoresWereReset, setScoresWereReset] = useState(false)
   useEffect(() => {
+    setScoresWereReset(false)
     if (visible) {
       playGameOverSound()
     }
@@ -19,7 +21,13 @@ const CreditsScreen: React.FC<Props> = ({ visible, onPlayAgain }) => {
     onPlayAgain()
   }
   const handleOnClickResetScores = () => {
-    setScoresWereReset(true)
+    const handler = setTimeout(() => {
+      resetScores()
+      setScoresWereReset(true)
+    }, 1)
+    return () => {
+      clearTimeout(handler)
+    }
   }
   return (
     <div className="credits-screen">
