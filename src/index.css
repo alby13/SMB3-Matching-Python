@@ -148,6 +148,7 @@ body, html {
 
 .end-screen table {
   width: 100%;
+  margin-bottom: 11px;
 }
 
 .end-screen-header {
@@ -165,10 +166,14 @@ body, html {
 }
 
 .credits-screen {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
   position: absolute;
   width: 165px;
-  height: 120px;
-  background-color: #3fbfff;
+  height: 121px;
+  background-color: #38a7de;
   font-family: 'SMB3';
   font-size: 10px;
   text-align: center;
@@ -181,9 +186,19 @@ body, html {
   margin: 0px;
 }
 
+.credits-screen-section {
+  flex: 1;
+}
+
+.credits-screen-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: 0.5em
+}
+
 .list-button {
   color: #3fbfff;
   font-family: inherit; /* Have to specify this explicitly for buttons for some reason */
   font-size: 1em;
-  margin-top: 11px;
 }

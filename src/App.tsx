@@ -98,7 +98,9 @@ const App = () => {
         visible={gameState === GameState.PatternCompleted}
         onContinue={handleContinue}
       />
-      <CreditsScreen visible={gameState === GameState.AllPatternsCompleted}/>
+      <CreditsScreen
+        visible={gameState === GameState.AllPatternsCompleted}
+      />
     </div>
   )
 }

@@ -6,28 +6,39 @@ type Props = {
 }
 
 const CreditsScreen: React.FC<Props> = ({ visible }) => {
-  if (!visible) return null
   useEffect(() => {
     if (visible) {
       playGameOverSound()
     }
   }, [visible])
+  if (!visible) return null
   const handleOnClickPlayAgain = () => {
   }
   const handleOnClickResetScores = () => {
   }
   return (
     <div className="credits-screen">
-      <p>game over<br />thanks for playing</p>
+      <div className="credits-screen-section">
+        <p>game over</p>
+        <p>thanks for playing</p>
+      </div>
+      <div className="credits-screen-section">
         <button className="list-button" onClick={handleOnClickPlayAgain}>
           play again
         </button>
-        <button className="list-button" onClick={handleOnClickResetScores}>
-          view on github&#x2197;
-        </button>
-        <button className="list-button" onClick={handleOnClickResetScores}>
-          reset scores
-        </button>
+      </div>
+      <div className="credits-screen-section credits-screen-actions">
+        <div>
+          <button className="list-button" onClick={handleOnClickResetScores}>
+            reset scores
+          </button>
+        </div>
+        <div>
+          <button className="list-button" onClick={handleOnClickResetScores}>
+            view on github&#x2197;
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
