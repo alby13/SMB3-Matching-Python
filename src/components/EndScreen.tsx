@@ -116,7 +116,6 @@ const EndScreen: React.FC<Props> = ({ puzzle, visible, onContinue }) => {
             <tr>
               <td style={{ visibility: timeVisibility }}>time</td>
               <td style={{ visibility: timeVisibility }}>{secondsElapsed}</td>
-
               <td style={{
                 visibility: bestVisibility,
                 color: puzzle.pattern.cardBackgroundColor
