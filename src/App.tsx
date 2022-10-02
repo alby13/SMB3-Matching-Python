@@ -6,6 +6,7 @@ import Grid from './components/Grid'
 import { patterns } from './domain/cards-factory'
 import { GameState } from './domain/GameState'
 import { Puzzle } from './domain/Puzzle'
+import { persistPatternIndex, retrievePatternIndex } from './save-game'
 
 function calculateScale(width: number, height: number): number {
   const ratio = (width || 1) / (height || 1)
@@ -21,10 +22,12 @@ function calculateScale(width: number, height: number): number {
 // Global variable, only used for debugging along with iwin() (see below)
 (window as any).iwincount = 0
 
+const lastPatternIndex = retrievePatternIndex()
+
 const App = () => {
   const [scale, setScale] = useState(1)
   const [iwin, setIwin] = useState(0)
-  const currentPatternIndex = useRef(0)
+  const currentPatternIndex = useRef(lastPatternIndex)
   const [currentPuzzle, setCurrentPuzzle] = useState<Puzzle>({
     pattern: patterns[currentPatternIndex.current],
     moves: 0,
@@ -75,6 +78,7 @@ const App = () => {
         startTime: 0,
         endTime: 0
       })
+      persistPatternIndex(currentPatternIndex.current)
       setGameState(GameState.InPlay)
     }
   }
