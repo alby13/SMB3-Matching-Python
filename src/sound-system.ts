@@ -52,7 +52,7 @@ const sfxMap = new Map<string, Sfx>()
       })
     }
   })
-})
+})()
 
 let audioContext: AudioContext | null = null
 ;
