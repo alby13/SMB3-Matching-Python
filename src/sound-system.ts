@@ -37,6 +37,9 @@ async function ensureSoundLoaded(url: string) {
   if (!audioContext) {
     audioContext = new AudioContext()
   }
+  if (audioContext.state === 'suspended') {
+    audioContext.resume() // Does this really do anything? https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API#controlling_sound
+  }
   const sfx = sfxMap.get(url)
   if (!sfx) return null
   if (sfx.source) sfx.source.stop() // Prevent amplifying by allowing only one at a time
