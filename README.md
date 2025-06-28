@@ -4,6 +4,11 @@ Main game is the file: smb3match.py
 
 You must copy the assets to a folder called "assets" where the program is located.
 
+<br>
+
+This project was mainly starting with a concept and assets and creating the correct game mechanics in Python.
+
+
 <br><br>
 
 #### OLD PREVIOUS VERSION:
