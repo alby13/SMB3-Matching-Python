@@ -1,4 +1,11 @@
-# matching
+# Super Mario Bros 3 Card Matching Converted to Python
+
+Main game is the file: smb3match.py
+
+You must copy the assets to a folder called "assets" where the program is located.
+
+
+OLD PREVIOUS VERSION:
 
 ## Play in Browser: https://hiddenwaffle.github.io/matching/
 
