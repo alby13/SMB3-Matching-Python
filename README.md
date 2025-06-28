@@ -4,8 +4,9 @@ Main game is the file: smb3match.py
 
 You must copy the assets to a folder called "assets" where the program is located.
 
+<br><br>
 
-OLD PREVIOUS VERSION:
+#### OLD PREVIOUS VERSION:
 
 ## Play in Browser: https://hiddenwaffle.github.io/matching/
 
